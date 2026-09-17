@@ -28,7 +28,7 @@ export default function Navbar() {
   return (
     <nav className="flex items-center gap-4 sm:gap-7">
       <Link
-        href="/categories"
+        href="/eventer"
         className={linkStyle}
       >
         Eventer

@@ -36,42 +36,8 @@ export default function Footer() {
   
     <div className="flex items-center justify-center gap-4">
   
-      {/* Instagram */}
-      <a
-        href="https://www.instagram.com/merkatabrukthandel/"
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="Besøk Merkatå Bruktbutikk på Instagram"
-        className="
-          flex
-          h-13
-          w-13
-          items-center
-          justify-center
-          rounded-full
-          border
-          border-white/20
-          bg-white/5
-          transition
-          duration-200
-  
-          hover:-translate-y-1
-          hover:border-brand
-          hover:bg-brand
-          hover:shadow-lg
-        "
-      >
-        <img
-          src="/instagram.svg"
-          alt=""
-          className="h-12 w-12 object-contain"
-        />
-      </a>
-  
-  
       {/* Facebook */}
       <a
-        href="https://www.facebook.com/p/Merkat%C3%A5-bruktbutikk-100054623161104/"
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Besøk Merkatå Bruktbutikk på Facebook"
@@ -95,7 +61,7 @@ export default function Footer() {
         "
       >
         <img
-          src="/facebook.svg"
+          src="/discord.svg"
           alt=""
           className="h-12 w-12 object-contain"
         />
