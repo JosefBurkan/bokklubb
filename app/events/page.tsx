@@ -24,13 +24,21 @@ export default async function Eventer() {
             Dette er alle de eksisterende eventene. Alt under er hentet fra 'eventer' tabellen
         </h1>
         
-        <br />
+        {/* Dette er for eventet og deltakerne*/}
+        <div>
             
         {events.map((event) => (
             <h1 key={event.id}>
-                {event.description}
+            <br/>
+            {event.description}
+
+            <br/>
+            Deltakere:
+            <br/>
+            {event.listOfParticipants}
             </h1>
-        ))}
+        ))}          
+        </div>
     </>
     );
   }
