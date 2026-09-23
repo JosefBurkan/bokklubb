@@ -32,9 +32,9 @@ export default async function Home() {
         
         
 
-        <Link href="/manedens_bok">Månedens bok</Link>
+        <Link href="/book_of_the_month">Månedens bok</Link>
 
-        <Link href="/eventer">Eventer</Link>
+        <Link href="/events">Eventer</Link>
 
       </div>
 
