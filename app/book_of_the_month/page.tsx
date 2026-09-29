@@ -27,7 +27,7 @@ export default async function Manedens_Bok() {
 
     <>
         <h1>
-            Dette er alle de eksisterende eventene. Alt under er hentet fra 'eventer' tabellen
+            Dette er månedens bok. Se under for å finne bøkene fra tidligere måneder
         </h1>
         
         <br />
@@ -38,7 +38,10 @@ export default async function Manedens_Bok() {
             </h1>
         ))}
             
+        <br/>
+            
         <Link href="/prev_books_of_the_month" >
+            
             Arkiv av tidligere månedens bøker
         </Link>
             

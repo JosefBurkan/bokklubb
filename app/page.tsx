@@ -3,24 +3,6 @@ import { transporter } from "@/nodemailer/nodemailer";
 
 export default async function Home() {
 
-  // Denne funksjonen fungerer ikke akkurat nå, fordi epostene den var avhengige av blir blokkert
-  // Må finne en annen løsning, som feks SendGrid
-  const sendMail = async () => {
-    try {
-      const info = await transporter.sendMail({
-        from: '"Bokklubben" <magicalshelfsociety@outlook.com>', // sender address
-        to: "josefpus@outlook.com", // list of recipients
-        subject: "Hello", // subject line
-        text: "Test! ", // plain text body
-        html: "<b>Hello world?</b>", // HTML body
-      });
-  
-      console.log("Message sent: %s", info.messageId);
-    } catch (err) {
-      console.error("Error while sending mail:", err);
-    }
-  }
-
   return (
     <div>
       <div></div>
