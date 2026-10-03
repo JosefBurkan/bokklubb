@@ -69,20 +69,20 @@ export default function Filter() {
             Alle kategorier
           </option>
 
-          <option value="Social">
-            Social
+          <option value="Sosial">
+            Sosial
           </option>
 
-          <option value="Activity">
-            Activity
+          <option value="Aktivitet">
+            Aktivitet
           </option>
 
-          <option value="Discussion">
-            Discussion
+          <option value="Diskusjon">
+            Diskusjon
           </option>
 
-          <option value="Other">
-            Other
+          <option value="Annet">
+            Annet
           </option>
         </select>
       </div>
