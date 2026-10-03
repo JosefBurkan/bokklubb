@@ -5,61 +5,46 @@ import {
   useSearchParams,
 } from "next/navigation";
 
-type FilterProps = {
-  name: string;
-};
-
-export default function Filter({
-}: FilterProps) {
+export default function Filter() {
   const router = useRouter();
   const searchParams = useSearchParams();
 
-  const updateFilter = (
-    key: string,
-    value: string
-  ) => {
+  const updateFilter = (value: string) => {
     const params = new URLSearchParams(
       searchParams.toString()
     );
 
     if (value) {
-      params.set(key, value);
+      params.set("category", value);
     } else {
-      params.delete(key);
+      params.delete("category");
     }
 
+    const queryString = params.toString();
+
     router.push(
-      `/events`
+      queryString
+        ? `/events?${queryString}`
+        : "/events"
     );
   };
 
   return (
-    <div className="flex flex-col gap-4 w-50 ml-10 pb-10">
-
-      {/* =========================
-          SUBCATEGORY
-      ========================= */}
-
+    <div className="ml-10 w-50 pb-10">
+      {/* Event category filter */}
       <div>
         <label
-          htmlFor="sub-category"
+          htmlFor="category"
           className="mb-2 block text-sm font-semibold"
         >
-          Underkategori
+          Kategori
         </label>
 
         <select
-          id="sub-category"
-          defaultValue={
-            searchParams.get(
-              "sub_category"
-            ) ?? ""
-          }
+          id="category"
+          value={searchParams.get("category") ?? ""}
           onChange={(event) =>
-            updateFilter(
-              "sub_category",
-              event.target.value
-            )
+            updateFilter(event.target.value)
           }
           className="
             h-11
@@ -80,22 +65,27 @@ export default function Filter({
             focus:ring-white/40
           "
         >
-          <option
-            value=""
-            className="text-black"
-          >
-            Alle underkategorier
+          <option value="">
+            Alle kategorier
           </option>
 
-          <option
-            value="Annet"
-            className="text-black"
-          >
-            Annet
+          <option value="Social">
+            Social
+          </option>
+
+          <option value="Activity">
+            Activity
+          </option>
+
+          <option value="Discussion">
+            Discussion
+          </option>
+
+          <option value="Other">
+            Other
           </option>
         </select>
       </div>
-
     </div>
   );
 }
