@@ -1,4 +1,4 @@
- import SendMailButton from '@/app/components/sendMailButton';
+ import SendMailButton from '@/app/components/SendMailButton';
 
 export default function prevBooksOfTheMonth() {
 

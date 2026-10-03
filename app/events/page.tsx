@@ -1,6 +1,7 @@
 import { cookies } from "next/headers";
 import { createClient } from "@/supabase/server";
 import registerForEvent from "@/app/api/registerForEvent";
+import Filter from "@/app/components/Filter"
 
 export default async function Eventer() {
 
@@ -24,6 +25,8 @@ export default async function Eventer() {
         <h1>
             Dette er alle de eksisterende eventene. Alt under er hentet fra 'eventer' tabellen
         </h1>
+
+        <Filter/>
         
         {/* Dette er for eventet og deltakerne*/}
         <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 items-start">
