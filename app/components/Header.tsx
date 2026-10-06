@@ -3,7 +3,7 @@ import Navbar from "./Navbar";
 
 export default function Header() {
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-white/10 bg-header">
+    <header className="sticky top-0 z-50 w-full border-b border-white/10 bg-header bg-transparent">
 
       <div className="mx-auto flex min-h-[72px] w-full max-w-7xl items-center justify-between gap-5 px-5 md:px-8 lg:px-12">
 

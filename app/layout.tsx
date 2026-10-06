@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import "./globals.css";
 
 import Footer from "./components/Footer";
@@ -15,7 +14,7 @@ export default function RootLayout({
 
         <Header />
         
-        <div className="flex flex-1 flex-col">
+        <div className="flex flex-1 flex-col bg-page-gradient">
           {children}
         </div>
 

@@ -7,16 +7,23 @@ export default function sendMailButton()
 {
     return (
         <>
-            <input type="text">
+            <div className="p-5">
+                <input type="text"
+                    className="bg-white
+                    w-50
+                    h-10">
 
-            </input>
+                </input>
+            </div>
             
 
-            <button onClick={() => SendMail()}
-             className="bg-green-500 text-white w-20 py-2 rounded hover:bg-green-600"
-            >
-                Send mail
-            </button>
+            <div className="p-5">
+                <button onClick={() => SendMail()}
+                className="bg-green-500 text-white w-20 py-2 rounded hover:bg-green-600 "
+                >
+                    Send mail
+                </button>
+            </div>
         </>
     )
 }

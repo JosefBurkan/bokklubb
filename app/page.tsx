@@ -5,9 +5,8 @@ export default async function Home() {
 
   return (
     <div>
-      <div></div>
 
-      <div className="flex flex-col items-center gap-4">
+      <div className="flex flex-col items-center gap-4 text-white">
 
         <p>Velkommen til Kamilla sin bokklubb. Her kan du finne både månedens bok, og kommende eventer</p>
         <br />

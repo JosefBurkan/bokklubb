@@ -1,3 +1,4 @@
+import { link } from "fs";
 import Link from "next/link";
 
 export default function Navbar() {
@@ -27,6 +28,14 @@ export default function Navbar() {
 
   return (
     <nav className="flex items-center gap-4 sm:gap-7">
+
+      <Link
+        href="/newsLetter"
+        className={linkStyle}>
+        
+        Nyheter
+      
+      </Link>
       <Link
         href="/events"
         className={linkStyle}

@@ -1,15 +1,15 @@
 @import "tailwindcss";
 
 @theme {
-  --color-page: #e8e3dc;
-  --color-main: #e8e3dc;
+  --color-page: #340949;
+  --color-main: #340949;
   --color-card: #f6f3ef;
 
   --color-hero: #d8cfc4;
   --color-section: #eee9e3;
 
-  --color-header: #542323;
-  --color-footer: #542323;
+  --color-header: #340949;
+  --color-footer: #3B1631;
 
   --color-brand: #a9533d;
 
@@ -18,4 +18,10 @@
   
   --color-category: #6a3030;
   --color-category-hover: #7b3939;
+
+  --background-image-page-gradient: linear-gradient(
+    to bottom,
+    #340949,
+    #3B1631
+  );
 }

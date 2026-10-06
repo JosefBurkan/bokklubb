@@ -1,6 +1,6 @@
 export default function Footer() {
     return (
-      <footer className="w-full bg-footer text-white">
+      <footer className="w-full bg-footer text-white border-t-1 border-white/10">
   
         <div className="mx-auto w-full max-w-7xl px-6 py-12 md:px-8 lg:px-12">
   
@@ -26,49 +26,49 @@ export default function Footer() {
   
   
               {/* =========================
-      SOCIAL MEDIA
-  ========================= */}
+              SOCIAL MEDIA
+              ========================= */}
   
-  <div className="mt-6">
-    <p className="mb-4 text-xs font-semibold uppercase tracking-wider text-white/70">
-      Følg oss
-    </p>
-  
-    <div className="flex items-center justify-center gap-4">
-  
-      {/* Facebook */}
-      <a
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="Besøk Merkatå Bruktbutikk på Facebook"
-        className="
-          flex
-          h-13
-          w-13
-          items-center
-          justify-center
-          rounded-full
-          border
-          border-white/20
-          bg-white/5
-          transition
-          duration-200
-  
-          hover:-translate-y-1
-          hover:border-brand
-          hover:bg-brand
-          hover:shadow-lg
-        "
-      >
-        <img
-          src="/discord.svg"
-          alt=""
-          className="h-12 w-12 object-contain"
-        />
-      </a>
-  
-    </div>
-  </div>
+      <div className="mt-6">
+        <p className="mb-4 text-xs font-semibold uppercase tracking-wider text-white/70">
+          Følg oss
+        </p>
+      
+        <div className="flex items-center justify-center gap-4">
+      
+          {/* Facebook */}
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Besøk Merkatå Bruktbutikk på Facebook"
+            className="
+              flex
+              h-13
+              w-13
+              items-center
+              justify-center
+              rounded-full
+              border
+              border-white/20
+              bg-white/5
+              transition
+              duration-200
+      
+              hover:-translate-y-1
+              hover:border-brand
+              hover:bg-brand
+              hover:shadow-lg
+            "
+          >
+            <img
+              src="/discord.svg"
+              alt=""
+              className="h-12 w-12 object-contain"
+            />
+          </a>
+      
+        </div>
+      </div>
             </div>
   
   
