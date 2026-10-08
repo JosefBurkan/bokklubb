@@ -1,14 +1,14 @@
 "use client"
 
 import SendMail from "@/resend/resend";
-import { text } from "stream/consumers";
+import submitEmail from "@/app/api/submitEmail";
 
-export default function sendMailButton()
-{
+export default function sendMailButton() {
     return (
-        <>
+        <form action={submitEmail} >
             <div className="p-5">
-                <input type="text"
+                <label htmlFor="email"></label>
+                <input name="email" type="text"
                     className="bg-white
                     w-50
                     h-10">
@@ -18,12 +18,12 @@ export default function sendMailButton()
             
 
             <div className="p-5">
-                <button onClick={() => SendMail()}
+                <button type="submit"
                 className="bg-green-500 text-white w-20 py-2 rounded hover:bg-green-600 "
                 >
                     Send mail
                 </button>
             </div>
-        </>
+        </form>
     )
 }

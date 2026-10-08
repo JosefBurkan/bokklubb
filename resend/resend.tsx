@@ -2,15 +2,15 @@
 
 import { Resend } from 'resend';
 
-export default async function SendMail() {
+export default async function SendMail( email: string ) {
 
     const resend = new Resend(process.env.RESEND_PASS);
 
     resend.emails.send({
-        from: 'onboarding@resend.dev',
-        to: process.env.RESEND_EMAIL,
-        subject: 'Hello World',
-        html: '<p>Resend er op!</p>'
+        from: 'Test <bokklubb@Lesely.no>',
+        to: email,
+        subject: 'Fra domenet',
+        html: '<p>BÆSJ</p>'
     });
 
     console.log("Message sent: %s");        
