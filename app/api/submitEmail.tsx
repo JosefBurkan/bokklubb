@@ -3,26 +3,54 @@
 import { cookies } from "next/headers";
 import { redirect } from 'next/navigation'
 import { createClient } from "@/supabase/server";
+import SendMail from "@/resend/resend";
 
 export default async function submitEmail(formData: FormData) {
 
+  const title = String(formData.get('email'))
+  
+
+  // Dette er for å sjekke om eposten allerede eksisterer 
   const cookieStore = await cookies();
   const supabase = await createClient(cookieStore)
-
-  const title = formData.get('email')
-
-  if (title && title.includes("@")) {
-
-    const { data, error } = await supabase
+  
+  
+  const { data: emailExists, error } = await supabase
       .from("listOfMembers")
-      .insert({ email: title });
+      .select("*")
+      .eq("email", title)
+      .limit(1)
+      .maybeSingle();
 
-    console.log({ data })
-
-    redirect('/newsLetter')
+  if (error) {
+    console.error(
+      "Error fetching events:",
+      error
+    );
   }
-  else 
+
+  // Legg inn eposten kun om den ikke finnes
+  if (!emailExists)
   {
-    console.log(`invalid data: ${title}`)
+    if (title && title.includes("@")) {
+
+      const { data, error } = await supabase
+        .from("listOfMembers")
+        .insert({ email: title });
+
+      console.log({ data })
+
+      SendMail(title);
+
+      redirect('/newsLetter')
+    }
+    else 
+    {
+      console.log(`invalid data: ${title}`)
+    }
+  }
+  else
+  {
+      console.log("User already exists")    
   }
 }

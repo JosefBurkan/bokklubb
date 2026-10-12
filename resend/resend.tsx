@@ -2,7 +2,7 @@
 
 import { Resend } from 'resend';
 
-export default async function SendMail( email: string ) {
+export default async function SendMail(email: string) {
 
     const resend = new Resend(process.env.RESEND_PASS);
 
@@ -13,6 +13,6 @@ export default async function SendMail( email: string ) {
         html: '<p>BÆSJ</p>'
     });
 
-    console.log("Message sent: %s");        
+    console.log("Message sent: %s");          
 
 }
