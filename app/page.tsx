@@ -12,7 +12,7 @@ export default async function Home() {
         
         
 
-        <Link href="/book_of_the_month">Månedens bok</Link>
+        <Link href="/book-of-the-month">Månedens bok</Link>
 
         <Link href="/events">Eventer</Link>
 

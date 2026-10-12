@@ -58,7 +58,7 @@ export default async function Manedens_Bok() {
             
         <br/>
             
-        <Link href="/prev_books_of_the_month" >
+        <Link href="/prev-books-of-the-month" >
             Arkiv av tidligere månedens bøker
                 </Link>
         </div>
