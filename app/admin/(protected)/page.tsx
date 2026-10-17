@@ -63,6 +63,27 @@ export default function AdminPage() {
               kommer senere.
             </p>
           </div>
+            
+          <Link
+            href="admin/news-letter"
+            className="
+              rounded-2xl
+              bg-white
+              p-6
+              shadow-sm
+              transition
+              hover:-translate-y-1
+              hover:shadow-lg
+            "
+          >
+            <h2 className="text-xl font-bold">
+              News Letter
+            </h2>
+
+            <p className="mt-2 text-gray-600">
+              Send ut en epost til alle medlemmer
+            </p>
+          </Link>
 
         </div>
       </div>
