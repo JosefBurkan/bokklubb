@@ -1,4 +1,4 @@
-import SendMailButton from '@/app/components/SendMailButton';
+import SendMailButton from '@/app/components/sendMailButton';
 
 export default async function prevBooksOfTheMonth() {
     
