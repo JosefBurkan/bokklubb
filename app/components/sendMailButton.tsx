@@ -1,7 +1,6 @@
 "use client"
 
-import SendMail from "@/resend/resend";
-import submitEmail from "@/app/api/submitEmail";
+import submitEmail from "@/app/api/emailRegistration/submitEmail";
 
 export default function sendMailButton() {
     return (

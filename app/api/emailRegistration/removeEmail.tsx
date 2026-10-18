@@ -3,17 +3,14 @@
 import { cookies } from "next/headers";
 import { redirect } from 'next/navigation'
 import { createClient } from "@/supabase/server";
-import SendMail from "@/resend/resend";
 
-export default async function submitEmail(formData: FormData) {
+export default async function removeEmail(formData: FormData) {
 
-  const title = String(formData.get('email'))
-  
+  const title = formData.get('email') as String
 
   // Dette er for å sjekke om eposten allerede eksisterer 
   const cookieStore = await cookies();
   const supabase = await createClient(cookieStore)
-  
   
   const { data: emailExists, error } = await supabase
       .from("listOfMembers")
@@ -30,27 +27,19 @@ export default async function submitEmail(formData: FormData) {
   }
 
   // Legg inn eposten kun om den ikke finnes
-  if (!emailExists)
+  if (emailExists)
   {
-    if (title && title.includes("@")) {
-
-      const { data, error } = await supabase
+    const { data } = await supabase
         .from("listOfMembers")
-        .insert({ email: title });
+        .delete()
+        .eq("email", title);
 
-      console.log({ data })
+    console.log({ data })
 
-      SendMail(title);
-
-      redirect('/newsLetter')
-    }
-    else 
-    {
-      console.log(`invalid data: ${title}`)
-    }
+    redirect('/newsLetter')
   }
   else
   {
-      console.log("User already exists")    
+      console.log(`Fant ingen registrert epost som heter ${title}`)    
   }
 }

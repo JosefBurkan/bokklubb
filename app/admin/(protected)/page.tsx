@@ -65,6 +65,30 @@ export default function AdminPage() {
             <p className="mt-2 text-gray-600">
               Opprett, rediger og adminstrer månedens bok.
             </p>
+<<<<<<< HEAD
+=======
+          </div>
+            
+          <Link
+            href="admin/news-letter"
+            className="
+              rounded-2xl
+              bg-white
+              p-6
+              shadow-sm
+              transition
+              hover:-translate-y-1
+              hover:shadow-lg
+            "
+          >
+            <h2 className="text-xl font-bold">
+              News Letter
+            </h2>
+
+            <p className="mt-2 text-gray-600">
+              Send ut en epost til alle medlemmer
+            </p>
+>>>>>>> f9267cffc55e8ef72199ddecd88330304379e4bb
           </Link>
 
         </div>
