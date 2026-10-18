@@ -14,7 +14,7 @@ export default async function AdminBooksPage() {
   const supabase = createClient(cookieStore);
 
   const { data: books, error } = await supabase
-    .from("manedens_Bok")
+    .from("Books")
     .select("*")
     .order("created_at", { ascending: false });
 

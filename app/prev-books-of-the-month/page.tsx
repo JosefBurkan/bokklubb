@@ -16,7 +16,7 @@ export default async function prevBooksOfTheMonth() {
     // Hent den aktive boka her
     // Aktiv betyr månedens bok
     const { data: books, error } = await supabase
-        .from("manedens_Bok")
+        .from("Books")
         .select("*")
         .eq("active", false);
   

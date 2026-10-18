@@ -128,7 +128,7 @@ export async function POST(request: Request) {
     uploadedPublicId = uploaded.public_id;
 
     const { data: book, error: insertError } = await supabase
-      .from("manedens_Bok")
+      .from("Books")
       .insert({
         name: name.trim(),
         description: description.trim(),
