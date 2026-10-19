@@ -16,7 +16,7 @@ export default async function prevBooksOfTheMonth() {
     // Hent den aktive boka her
     // Aktiv betyr månedens bok
     const { data: books, error } = await supabase
-        .from("manedens_Bok")
+        .from("Books")
         .select("*")
         .eq("active", false);
   
@@ -33,24 +33,25 @@ export default async function prevBooksOfTheMonth() {
     return (
         <>
             <div className="text-white">
-                <h1>
-                Velkommen til arkivet med alle de tidligere bøkene
+                <h1 className="p-10">
+                    Velkommen til arkivet med alle de tidligere bøkene
                 </h1>
-
-                {books.map((book) => (
-            <h1 key={book.id}>
-                {book.name}
-                <img className="max-w-64"
-                    src={book.cloudinaryPath}
-                    alt={book.name}
-                />
-                {book.description}
-                <br />
-                {/* Bruker datoen til å hente riktig posisjon fra månedslista */}
-                Denne boka gjelder for:&nbsp;
-                {months[new Date(book.created_at).getMonth()]}
-            </h1>
-        ))}
+                <div className="grid grid-cols-4 p-10">
+                    {books.map((book) => (
+                    <h1 key={book.id}>
+                        {book.name}
+                        <img className="max-w-64"
+                            src={book.cloudinaryPath}
+                            alt={book.name}
+                        />
+                        {book.description}
+                        <br />
+                        {/* Bruker datoen til å hente riktig posisjon fra månedslista */}
+                        Denne boka gjaldt for:&nbsp;
+                        {months[new Date(book.created_at).getMonth()]}
+                    </h1>
+                    ))}
+                </div>
 
             </div> 
 

@@ -4,6 +4,7 @@ import { cookies } from "next/headers";
 import { redirect } from 'next/navigation'
 import { createClient } from "@/supabase/server";
 import SendMail from "@/resend/sendMail";
+import sendDiscordMessage from "@/discord/sendMessage";
 
 export default async function submitEmail(formData: FormData) {
 
@@ -41,6 +42,11 @@ export default async function submitEmail(formData: FormData) {
       console.log({ data })
 
       SendMail(title);
+
+      await sendDiscordMessage(
+        `${title} er nå en del av klubben!`,
+        "Nå er du en del av verdens kuleste bokklubb"
+      );
 
       redirect('/newsLetter')
     }
