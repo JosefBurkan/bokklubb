@@ -1,4 +1,5 @@
-import SendMailButton from '@/app/components/sendMailButton';
+import SendMailButton from '@/app/components/SendMailButton';
+import RemoveEmailButton from '@/app/components/RemoveEmailButton';
 
 export default async function prevBooksOfTheMonth() {
     
@@ -23,7 +24,13 @@ export default async function prevBooksOfTheMonth() {
                 </div>
             </div>
 
-            <SendMailButton />
+            <div className="flex">
+
+                <SendMailButton />
+
+                <RemoveEmailButton />
+                
+                </div>
         </>
     );
 }
