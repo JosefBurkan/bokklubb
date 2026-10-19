@@ -30,7 +30,7 @@ export default async function prevBooksOfTheMonth() {
 
                 <RemoveEmailButton />
                 
-                </div>
+            </div>
         </>
     );
 }

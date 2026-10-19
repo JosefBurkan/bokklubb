@@ -12,9 +12,17 @@ export default async function Home() {
         
         
 
-        <Link href="/book-of-the-month">Månedens bok</Link>
+        <div className="grid grid-cols-2 gap-25">
 
-        <Link href="/events">Eventer</Link>
+          <Link href="/book-of-the-month"
+            className="bg-yellow-500 p-10 rounded text-center">
+            Månedens bok</Link>
+
+          <Link href="/events"
+            className="bg-yellow-500 p-10 rounded text-center">
+            Eventer</Link>
+          
+        </div>
 
       </div>
 
