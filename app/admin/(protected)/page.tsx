@@ -46,12 +46,16 @@ export default function AdminPage() {
           </Link>
 
           {/* Books */}
-          <div
+          <Link
+            href="/admin/books"
             className="
               rounded-2xl
               bg-white
               p-6
               shadow-sm
+              transition
+              hover:-translate-y-1
+              hover:shadow-lg
             "
           >
             <h2 className="text-xl font-bold">
@@ -59,13 +63,13 @@ export default function AdminPage() {
             </h2>
 
             <p className="mt-2 text-gray-600">
-              Administrasjon av månedens bok
-              kommer senere.
+              Opprett, rediger og adminstrer månedens bok.
             </p>
-          </div>
-            
+          </Link>
+
+          {/* News Letter */}
           <Link
-            href="admin/news-letter"
+            href="/admin/news-letter"
             className="
               rounded-2xl
               bg-white
