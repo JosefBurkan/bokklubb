@@ -1,5 +1,5 @@
-import { link } from "fs";
 import Link from "next/link";
+import UserStatus from "@/app/components/UserStatus";
 
 export default function Navbar() {
   const linkStyle = `
@@ -50,6 +50,9 @@ export default function Navbar() {
       >
         Om klubben
       </Link>
+
+      <UserStatus />
+      
 
     </nav>
   );
