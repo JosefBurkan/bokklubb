@@ -4,7 +4,7 @@ import { cookies } from "next/headers";
 import { redirect } from 'next/navigation'
 import { createClient } from "@/supabase/server";
 import SendMail from "@/resend/sendMail";
-import sendDiscordMessage from "@/discord/sendMessage";
+import sendDiscordMessage from "@/discord/sendDiscordMessage";
 
 export default async function submitEmail(formData: FormData) {
 

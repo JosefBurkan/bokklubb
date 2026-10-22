@@ -47,7 +47,10 @@ export default async function Eventer({
   }
 
   return (
-    <>
+    <div className="relative overflow-hidden">
+    <div className="stars" aria-hidden="true" />
+      <div className="stars stars-slow" aria-hidden="true" />
+      
       <h1>
         Dette er alle de eksisterende eventene.
         Alt under er hentet fra 'eventer' tabellen
@@ -62,7 +65,7 @@ export default async function Eventer({
           <form
             key={event.id}
             action={registerForEvent}
-            className="ml-10 w-full rounded bg-gray-400"
+            className="ml-10 w-full rounded bg-gray-500"
           >
             {/* Event description */}
             {event.description}
@@ -124,6 +127,6 @@ export default async function Eventer({
           </form>
         ))}
       </div>
-    </>
+    </div>
   );
 }

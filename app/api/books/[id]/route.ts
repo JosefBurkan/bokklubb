@@ -45,7 +45,7 @@ function uploadImage(buffer: Buffer): Promise<{
   });
 }
 
-export async function PATCH(
+export async PATCH(
   request: Request,
   context: RouteContext,
 ) {

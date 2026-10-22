@@ -36,6 +36,7 @@ export default function Navbar() {
         Nyheter
       
       </Link>
+
       <Link
         href="/events"
         className={linkStyle}

@@ -2,6 +2,8 @@ import { cookies } from "next/headers";
 
 import { createClient } from "@/supabase/server";
 
+import sendDiscordEvent from "@/discord/sendDiscordEvent";
+
 const VALID_CATEGORIES = [
   "Sosial",
   "Aktivitet",
@@ -94,6 +96,11 @@ export async function POST(request: Request) {
       { status: 400 }
     );
   }
+
+  await sendDiscordEvent(
+    `En ny event er opprettet!`,
+    `${body.description}`
+  );
 
   return Response.json(data, { status: 201 });
 }

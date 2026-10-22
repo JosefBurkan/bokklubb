@@ -4,8 +4,12 @@ import RemoveEmailButton from '@/app/components/RemoveEmailButton';
 export default async function prevBooksOfTheMonth() {
     
     return (
-        <>
+        <div className="relative overflow-hidden">
+        <div className="stars" aria-hidden="true" />
+            <div className="stars stars-slow" aria-hidden="true" />
+            
             <div className="text-white">
+
                 <br />
 
                 <div className="p-5">
@@ -31,6 +35,6 @@ export default async function prevBooksOfTheMonth() {
                 <RemoveEmailButton />
                 
             </div>
-        </>
+        </div>
     );
 }

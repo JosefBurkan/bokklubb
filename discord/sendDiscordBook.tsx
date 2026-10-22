@@ -1,7 +1,6 @@
-
 import "server-only";
 
-export default async function sendDiscordMessage(
+export default async function sendDiscordBook(
   title: string,
   description: string
 ) {
@@ -23,7 +22,7 @@ export default async function sendDiscordMessage(
       body: JSON.stringify({
         embeds: [
           {
-            title: "Velkommen",
+            title: "Ny event oprettet!",
             description: `**${title}**\n\n${description}`,
             color: 0x5865f2,
           },
