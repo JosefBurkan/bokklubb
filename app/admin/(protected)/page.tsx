@@ -17,8 +17,6 @@ export default function AdminPage() {
               Administrer bokklubben.
             </p>
           </div>
-
-          <LogoutButton />
         </div>
 
         <div className="grid gap-5 sm:grid-cols-2">
