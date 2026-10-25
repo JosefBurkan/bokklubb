@@ -5,6 +5,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 
+// Client page for uploading a new book and its cover image.
 export default function BookForm() {
   const router = useRouter();
   const [name, setName] = useState("");
@@ -24,6 +25,7 @@ export default function BookForm() {
       return;
     }
 
+    // FormData is used because the request includes an image file upload.
     const formData = new FormData();
     formData.append("name", name);
     formData.append("description", description);
@@ -56,17 +58,19 @@ export default function BookForm() {
   return (
     <main className="min-h-screen bg-[var(--main)] px-6 py-10 text-gray-900">
       <div className="mx-auto max-w-3xl">
-        <Link href="/admin/books" className="text-sm underline">
+        {/* Back link and page title. */}
+        <Link href="/admin/books" className="text-sm text-white/80 underline hover:text-white">
           ← Tilbake til bokadministrasjon
         </Link>
 
-        <h1 className="mt-6 text-3xl font-bold">
+        <h1 className="mt-6 text-3xl font-bold text-white">
           Legg til bok
         </h1>
-        <p className="mt-2 text-gray-600">
+        <p className="mt-2 text-white/80">
           Legg inn informasjon og omslagsbilde for en ny bok.
         </p>
 
+        {/* New book fields and cover image upload. */}
         <form
           onSubmit={handleSubmit}
           className="mt-8 space-y-6 rounded-2xl bg-white p-6 shadow-sm"
@@ -140,11 +144,13 @@ export default function BookForm() {
           </div>
 
           {error && (
+            /* Display validation or API errors above the form actions. */
             <p role="alert" className="text-sm text-red-600">
               {error}
             </p>
           )}
 
+          {/* Save the book or return to the collection without saving. */}
           <div className="flex flex-wrap gap-3">
             <button
               type="submit"
@@ -162,6 +168,7 @@ export default function BookForm() {
             </Link>
           </div>
 
+          {/* New books are initially archived; activation is a separate action. */}
           <p className="text-sm text-gray-500">
             Den nye boka lagres som arkivert. Du kan aktivere den
             som månedens bok etterpå.
