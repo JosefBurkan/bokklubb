@@ -21,6 +21,7 @@ const ALLOWED_TYPES = new Set([
   "image/webp",
 ]);
 
+// Server page: loads the selected book, protects the update action, and renders its form.
 export default async function EditBookPage({
   params,
 }: EditBookPageProps) {
@@ -58,6 +59,7 @@ export default async function EditBookPage({
     return (
       <main className="min-h-screen bg-[var(--main)] px-6 py-10 text-gray-900">
         <div className="mx-auto max-w-3xl rounded-2xl bg-white p-6">
+          {/* Explain the load failure and offer a way back to the book list. */}
           <h1 className="text-2xl font-bold">
             Kunne ikke hente boka
           </h1>
@@ -239,30 +241,30 @@ export default async function EditBookPage({
     <main className="min-h-screen bg-[var(--main)] px-6 py-10 text-gray-900">
       <div className="mx-auto max-w-3xl">
 
-        {/* Header */}
+        {/* Back link and title for the edit page. */}
         <div className="mb-8">
           <Link
             href="/admin/books"
-            className="text-sm font-medium text-gray-600 hover:text-gray-900"
+            className="text-sm font-medium text-white/80 hover:text-white"
           >
             ← Tilbake til bokadministrasjon
           </Link>
 
-          <h1 className="mt-4 text-3xl font-bold">
+          <h1 className="mt-4 text-3xl font-bold text-white">
             Rediger bok
           </h1>
 
-          <p className="mt-2 text-gray-600">
+          <p className="mt-2 text-white/80">
             Endre bokinformasjonen eller bytt omslagsbilde.
           </p>
         </div>
 
-        {/* Form */}
+        {/* Server Action submits the edited fields and optional replacement cover. */}
         <form
   action={updateBook}
   className="rounded-2xl bg-white p-6 shadow-sm"
 >
-          {/* Title */}
+          {/* Book title field. */}
           <div className="mb-6">
             <label
               htmlFor="name"
@@ -294,7 +296,7 @@ export default async function EditBookPage({
             />
           </div>
 
-          {/* Description */}
+          {/* Book description field. */}
           <div className="mb-6">
             <label
               htmlFor="description"
@@ -326,7 +328,7 @@ export default async function EditBookPage({
             />
           </div>
 
-          {/* Current cover */}
+          {/* Current cover preview and optional replacement upload. */}
           <div className="mb-6">
             <p className="mb-2 block text-sm font-semibold">
               Nåværende omslagsbilde
@@ -374,7 +376,7 @@ export default async function EditBookPage({
             </p>
           </div>
 
-          {/* Buttons */}
+          {/* Cancel without saving or submit the changes. */}
           <div className="flex gap-3">
             <Link
               href="/admin/books"
