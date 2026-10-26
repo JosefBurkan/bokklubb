@@ -1,6 +1,5 @@
 import Link from "next/link";
 
-import LogoutButton from "@/app/components/LogoutButton";
 
 export default function AdminPage() {
   return (
