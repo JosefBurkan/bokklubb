@@ -8,12 +8,6 @@ const links = [
     icon: "📖",
   },
   {
-    href: "/events",
-    title: "Eventer",
-    text: "Kommende samlinger og møter",
-    icon: "🕯️",
-  },
-  {
     href: "/program",
     title: "Program",
     text: "Leseplanen for sesongen",
@@ -58,7 +52,7 @@ export default async function Home() {
         </section>
 
         {/* Navigasjon */}
-        <section className="grid gap-6 md:grid-cols-3">
+        <section className="grid gap-6 grid-cols-2">
           {links.map((link) => (
             <Link
               key={link.href}

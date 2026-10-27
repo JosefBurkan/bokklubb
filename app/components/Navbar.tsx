@@ -38,10 +38,10 @@ export default function Navbar() {
       </Link>
 
       <Link
-        href="/events"
+        href="/program"
         className={linkStyle}
       >
-        Eventer
+        Program
       </Link>
 
       <Link
