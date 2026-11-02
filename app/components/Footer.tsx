@@ -16,12 +16,11 @@ export default function Footer() {
   
             <div>
               <h3 className="text-base font-bold">
-                MERKATÅ BRUKTBUTIKK
+                Lesely
               </h3>
   
               <p className="mx-auto mt-4 max-w-[300px] text-sm leading-6 text-white/65">
-                Din lokale bruktbutikk med unike gjenstander,
-                vintage, retro og brukte skatter.
+                Et ly å lese i
               </p>
   
   
@@ -70,26 +69,6 @@ export default function Footer() {
         </div>
       </div>
             </div>
-  
-  
-            {/* ========================= 
-                OPENING HOURS
-            ========================= */}
-  
-            <div>
-  
-              <h3 className="text-sm font-semibold uppercase tracking-wider text-white/90">
-                Åpningstider
-              </h3>
-  
-              <p className="mt-4 text-sm leading-6 text-white/65">
-                Tir-Fre 11-18
-                <br />
-                Lør-Søn 12-18
-              </p>
-  
-            </div>
-  
   
             {/* =========================
                 CONTACT

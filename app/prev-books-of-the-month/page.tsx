@@ -31,31 +31,56 @@ export default async function prevBooksOfTheMonth() {
 
 
     return (
-        <>
-            <div className="text-white">
-                <h1 className="p-10">
-                    Velkommen til arkivet med alle de tidligere bøkene
-                </h1>
-                <div className="grid grid-cols-4 p-10">
-                    {books.map((book) => (
-                    <h1 key={book.id}>
-                        {book.name}
-                        <img className="max-w-64"
-                            src={book.cloudinaryPath}
-                            alt={book.name}
-                        />
-                        {book.description}
-                        <br />
+        <div className="text-black">
+            <h1 className="text-4xl ">
+                Dette har vi lest sammen
+            </h1>
+            
+            <div className="grid md:grid-cols-2 sm:grid-cols-1 gap-10 p-10">
+                {books.map((book) => (
+                    <div
+                    key={book.id}
+                    className="gap-4 rounded-2xl bg-white p-4 w-150"
+                    >
+                    <div className="flex items-start">
+                    <img
+                        className="w-32 shrink-0 rounded-sm"
+                        src={book.cloudinaryPath}
+                        alt={book.name}
+                    />
+
+                    <div className="flex min-w-0 flex-col gap-3 ml-5">
+                        <h3 className="text-xl font-bold">{book.name}</h3>
+                        <p>{book.description}</p>
                         {/* Bruker datoen til å hente riktig posisjon fra månedslista */}
-                        Denne boka gjaldt for:&nbsp;
-                        {months[new Date(book.created_at).getMonth()]}
-                    </h1>
-                    ))}
-                </div>
+                        <p className="text-sm text-gray-500">
+                            Denne boka gjaldt for: {months[new Date(book.created_at).getMonth()]}
+                        </p>
+                    </div>
+            </div>
 
-            </div> 
+                        {/* Community reviews */}
+                    <p className="pt-5">📖 Community reviews</p>
+                    <div className="mt-5 flex items-start gap-4">
+                        <div className="rounded-lg bg-[#FCF3E5] p-4 w-70 h-35">
+                            <p className="inline-block rounded-2xl bg-[#FCF3E5] px-3 py-1 font-bold text-[#85597A]">
+                                elsket den
+                            </p>
+                        </div>
+                        <div className="rounded-lg bg-[#FCF3E5] p-4 w-70 h-35">
+                            <p className="inline-block rounded-2xl bg-[#FCF3E5] px-3 py-1 font-bold text-[#85597A]">
+                                ikke for meg
+                            </p>
+                        </div>
+                    </div>
+                                                
+                    </div>
 
-        </>
+                ))}
+            </div>
+
+        </div> 
+
     );
     
 }

@@ -16,7 +16,7 @@ export default function removeEmailButton() {
             </div>
             
 
-            <div className="p-5">
+            <div className="p-5 flex justify-center">
                 <button type="submit"
                 className="bg-red-500 text-white w-25 py-2 rounded hover:bg-red-600 "
                 >

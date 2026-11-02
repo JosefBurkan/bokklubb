@@ -18,7 +18,7 @@ export default function sendNewsLetterButton() {
 
             <div className="p-5">
                 <button type="submit"
-                className="bg-green-500 text-white w-50 py-2 rounded hover:bg-green-600 "
+                className="bg-green-500 text-white w-50 py-2 rounded hover:bg-green-600"
                 >
                     Send ut nyhetsbrev
                 </button>

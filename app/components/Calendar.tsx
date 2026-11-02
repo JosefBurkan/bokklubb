@@ -18,7 +18,7 @@ type CalendarProps = {
   };
 
 export function Calendar({ events }: CalendarProps) {
-  const router = useRouter();
+  
 
   const today = new Date();
   const [year, setYear] = useState(today.getFullYear());
@@ -27,7 +27,8 @@ export function Calendar({ events }: CalendarProps) {
     dateKey(today.getFullYear(), today.getMonth(), today.getDate())
   );
     
-    
+  const router = useRouter();
+  
   const goToEvent = (id: number) => {
     router.push(`/events/${id}`);
   };

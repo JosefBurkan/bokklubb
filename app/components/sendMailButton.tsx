@@ -16,7 +16,7 @@ export default function sendMailButton() {
             </div>
             
 
-            <div className="p-5">
+            <div className="p-5 flex justify-center">
                 <button type="submit"
                 className="bg-green-500 text-white w-20 py-2 rounded hover:bg-green-600 "
                 >

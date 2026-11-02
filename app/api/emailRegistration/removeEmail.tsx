@@ -25,7 +25,7 @@ export default async function removeEmail(formData: FormData) {
       error
     );
   }
-
+  
   // Legg inn eposten kun om den ikke finnes
   if (emailExists)
   {

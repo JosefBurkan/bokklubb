@@ -38,13 +38,6 @@ export default function Navbar() {
       </Link>
 
       <Link
-        href="/program"
-        className={linkStyle}
-      >
-        Program
-      </Link>
-
-      <Link
         href="/about"
         className={linkStyle}
       >
