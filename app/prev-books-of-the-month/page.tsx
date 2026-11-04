@@ -13,8 +13,7 @@ export default async function prevBooksOfTheMonth() {
     const cookieStore = await cookies();
     const supabase = createClient(cookieStore);
 
-    // Hent den aktive boka her
-    // Aktiv betyr månedens bok
+    // Hent alle bøker som ikke er markert som månedens bok
     const { data: books, error } = await supabase
         .from("Books")
         .select("*")
@@ -26,6 +25,18 @@ export default async function prevBooksOfTheMonth() {
         error
       );
     }
+
+    const { data: reviews } = await supabase
+    .from("book_reviews")
+    .select("*")
+
+    if (error) {
+        console.error(
+            "Error fetching events:",
+            error
+        );
+    }
+
 
     console.log(books);
 
@@ -59,16 +70,23 @@ export default async function prevBooksOfTheMonth() {
                     </div>
             </div>
 
-                        {/* Community reviews */}
+                    {/* Community reviews */}
                     <p className="pt-5">📖 Community reviews</p>
                     <div className="mt-5 flex items-start gap-4">
                         <div className="rounded-lg bg-[#FCF3E5] p-4 w-70 h-35">
-                            <p className="inline-block rounded-2xl bg-[#FCF3E5] px-3 py-1 font-bold text-[#85597A]">
+                            <p className="inline-block rounded-2xl bg-[#F6DCE8] px-3 py-1 font-bold text-[#85597A]">
                                 elsket den
+                            </p>
+                            <p className="text-black">
+                                {reviews
+                                    .filter((review) => review.book_id === book.id)
+                                    .map((review) => (
+                                    <span key={review.id}>{review.review}</span>
+                                ))}
                             </p>
                         </div>
                         <div className="rounded-lg bg-[#FCF3E5] p-4 w-70 h-35">
-                            <p className="inline-block rounded-2xl bg-[#FCF3E5] px-3 py-1 font-bold text-[#85597A]">
+                            <p className="inline-block rounded-2xl bg-[#E9E1E5] px-3 py-1 font-bold text-[#85597A]">
                                 ikke for meg
                             </p>
                         </div>

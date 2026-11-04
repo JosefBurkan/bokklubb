@@ -30,17 +30,23 @@ export default function Navbar() {
     <nav className="flex items-center gap-4 sm:gap-7">
 
       <Link
+        href="/prev-books-of-the-month"
+        className={linkStyle}>
+
+        Bøker
+      </Link>
+
+      <Link
         href="/newsLetter"
         className={linkStyle}>
         
         Nyheter
-      
       </Link>
 
       <Link
         href="/about"
-        className={linkStyle}
-      >
+        className={linkStyle}>
+        
         Om klubben
       </Link>
 
