@@ -100,7 +100,7 @@ export default function NewsletterComposer() {
   return (
     <div className="grid gap-8 lg:grid-cols-2">
       {/* Newsletter content and design controls. */}
-      <form onSubmit={handleSubmit} className="space-y-5 rounded-2xl bg-white p-6 shadow-sm">
+      <form onSubmit={handleSubmit} className="space-y-5 rounded-2xl border border-[#331F2E]/10 bg-white p-6 shadow-sm sm:p-8">
         {/* Subject is the text shown in the recipient's inbox. */}
         <div>
           <label htmlFor="newsletter-subject" className="mb-2 block text-sm font-semibold">
@@ -202,7 +202,7 @@ export default function NewsletterComposer() {
         <button
           type="submit"
           disabled={sending}
-          className="rounded-lg bg-[#176b57] px-5 py-3 font-semibold text-white hover:bg-[#125744] disabled:cursor-wait disabled:opacity-60"
+          className="rounded-lg bg-[#331F2E] px-5 py-3 font-semibold text-white transition hover:bg-[#5C3C54] disabled:cursor-wait disabled:opacity-60"
         >
           {sending ? "Sender til medlemmene..." : "Send nyhetsbrev"}
         </button>
@@ -213,7 +213,7 @@ export default function NewsletterComposer() {
 
       {/* Live preview of the email layout. */}
       <section aria-label="Forhåndsvisning av nyhetsbrev">
-        <h2 className="mb-3 text-lg font-semibold text-white">Forhåndsvisning</h2>
+        <h2 className="mb-3 font-display text-lg font-semibold text-[#331F2E]">Forhåndsvisning</h2>
         <div className="overflow-hidden rounded-xl border border-gray-200 bg-[#f4f1f6] p-4 sm:p-8">
           <div className="mx-auto max-w-xl overflow-hidden rounded-lg bg-white shadow-sm">
             <div className="h-2" style={{ backgroundColor: accentColor }} />

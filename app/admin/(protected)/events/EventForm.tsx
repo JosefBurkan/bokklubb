@@ -72,7 +72,7 @@ export default function EventForm({
   }
 
   return (
-    <form onSubmit={handleSubmit} className="rounded-2xl bg-white p-6 shadow-sm">
+    <form onSubmit={handleSubmit} className="rounded-2xl border border-[#331F2E]/10 bg-white p-6 shadow-sm sm:p-8">
       {/* Event date and start time. */}
       <div className="mb-6">
         <label htmlFor="event-date" className="mb-2 block text-sm font-semibold">
@@ -84,7 +84,7 @@ export default function EventForm({
           value={date}
           onChange={(event) => setDate(event.target.value)}
           required
-          className="w-full rounded-lg border border-gray-300 px-4 py-3 text-black outline-none focus:border-black"
+          className="w-full rounded-lg border border-[#331F2E]/20 px-4 py-3 text-[#331F2E] outline-none focus:border-[#A9533D] focus:ring-2 focus:ring-[#A9533D]/15"
         />
       </div>
 
@@ -100,7 +100,7 @@ export default function EventForm({
           required
           rows={5}
           placeholder="Skriv en beskrivelse av eventet..."
-          className="w-full rounded-lg border border-gray-300 px-4 py-3 text-black outline-none focus:border-black"
+          className="w-full rounded-lg border border-[#331F2E]/20 px-4 py-3 text-[#331F2E] outline-none focus:border-[#A9533D] focus:ring-2 focus:ring-[#A9533D]/15"
         />
       </div>
 
@@ -113,7 +113,7 @@ export default function EventForm({
           id="event-category"
           value={category}
           onChange={(event) => setCategory(event.target.value)}
-          className="w-full rounded-lg border border-gray-300 bg-white px-4 py-3 text-black outline-none focus:border-black"
+          className="w-full rounded-lg border border-[#331F2E]/20 bg-white px-4 py-3 text-[#331F2E] outline-none focus:border-[#A9533D] focus:ring-2 focus:ring-[#A9533D]/15"
         >
           {EVENT_CATEGORIES.map((eventCategory) => (
             <option key={eventCategory} value={eventCategory}>
@@ -135,14 +135,14 @@ export default function EventForm({
         <button
           type="button"
           onClick={() => router.push(cancelHref)}
-          className="rounded-lg border border-gray-300 px-5 py-3 font-medium text-gray-700 hover:bg-gray-50"
+          className="rounded-lg border border-[#331F2E]/20 px-5 py-3 font-semibold text-[#331F2E] hover:bg-[#FCF3E5]"
         >
           Avbryt
         </button>
         <button
           type="submit"
           disabled={loading}
-          className="rounded-lg bg-black px-5 py-3 font-semibold text-white hover:bg-gray-700 disabled:cursor-not-allowed disabled:opacity-50"
+          className="rounded-lg bg-[#331F2E] px-5 py-3 font-semibold text-white hover:bg-[#5C3C54] disabled:cursor-not-allowed disabled:opacity-50"
         >
           {loading
             ? "Lagrer..."

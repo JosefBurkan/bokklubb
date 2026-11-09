@@ -57,20 +57,20 @@ export default async function EditBookPage({
     console.error("Could not fetch book:", bookError.message);
 
     return (
-      <main className="min-h-screen bg-[var(--main)] px-6 py-10 text-gray-900">
-        <div className="mx-auto max-w-3xl rounded-2xl bg-white p-6">
+      <main className="min-h-full flex-1 bg-[#E7DCE8] px-6 py-10 text-[#331F2E] sm:py-14">
+        <div className="mx-auto max-w-3xl rounded-2xl border border-[#331F2E]/10 bg-white p-6 shadow-sm">
           {/* Explain the load failure and offer a way back to the book list. */}
-          <h1 className="text-2xl font-bold">
+          <h1 className="font-display text-2xl font-semibold text-[#331F2E]">
             Kunne ikke hente boka
           </h1>
 
-          <p className="mt-3 text-gray-600">
+          <p className="mt-3 text-[#5C3C54]">
             {bookError.message}
           </p>
 
           <Link
             href="/admin/books"
-            className="mt-6 inline-block underline"
+            className="mt-6 inline-block font-semibold text-[#A9533D] underline"
           >
             ← Tilbake til bokadministrasjon
           </Link>
@@ -238,23 +238,24 @@ export default async function EditBookPage({
   }
 
   return (
-    <main className="min-h-screen bg-[var(--main)] px-6 py-10 text-gray-900">
+    <main className="min-h-full flex-1 bg-[#E7DCE8] px-6 py-10 text-[#331F2E] sm:py-14">
       <div className="mx-auto max-w-3xl">
 
         {/* Back link and title for the edit page. */}
         <div className="mb-8">
           <Link
             href="/admin/books"
-            className="text-sm font-medium text-white/80 hover:text-white"
+            className="text-sm font-semibold text-[#6A465E] underline decoration-[#C99B72] underline-offset-4 hover:text-[#A9533D]"
           >
             ← Tilbake til bokadministrasjon
           </Link>
 
-          <h1 className="mt-4 text-3xl font-bold text-white">
+          <p className="mt-6 text-sm font-semibold uppercase tracking-[0.16em] text-[#A9533D]">Boksamlingen</p>
+          <h1 className="mt-2 font-display text-3xl font-semibold text-[#331F2E] sm:text-4xl">
             Rediger bok
           </h1>
 
-          <p className="mt-2 text-white/80">
+          <p className="mt-2 text-[#5C3C54]">
             Endre bokinformasjonen eller bytt omslagsbilde.
           </p>
         </div>
@@ -262,7 +263,7 @@ export default async function EditBookPage({
         {/* Server Action submits the edited fields and optional replacement cover. */}
         <form
   action={updateBook}
-  className="rounded-2xl bg-white p-6 shadow-sm"
+  className="rounded-2xl border border-[#331F2E]/10 bg-white p-6 shadow-sm sm:p-8"
 >
           {/* Book title field. */}
           <div className="mb-6">
@@ -388,8 +389,9 @@ export default async function EditBookPage({
                 px-5
                 py-3
                 font-semibold
-                text-gray-700
-                hover:bg-gray-50
+                font-semibold
+                text-[#331F2E]
+                hover:bg-[#FCF3E5]
               "
             >
               Avbryt
@@ -399,13 +401,13 @@ export default async function EditBookPage({
               type="submit"
               className="
                 rounded-lg
-                bg-black
+                bg-[#331F2E]
                 px-5
                 py-3
                 font-semibold
                 text-white
                 transition
-                hover:bg-gray-700
+                hover:bg-[#5C3C54]
               "
             >
               Lagre endringer

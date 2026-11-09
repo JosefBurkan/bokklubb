@@ -81,7 +81,7 @@ export default async function AdminBooksPage({
     );
 
     return (
-      <main className="min-h-screen bg-[var(--main)] px-6 py-10">
+      <main className="min-h-full flex-1 bg-[#E7DCE8] px-6 py-10 text-[#331F2E] sm:py-14">
         <div className="mx-auto max-w-6xl rounded-2xl bg-white p-6">
           <h1 className="text-2xl font-bold">
             Administrer månedens bok
@@ -90,7 +90,7 @@ export default async function AdminBooksPage({
             Kunne ikke hente bøkene fra databasen.
             Sjekk Supabase-tilkoblingen og RLS-policyene.
           </p>
-          <Link className="mt-4 inline-block underline" href="/admin">
+          <Link className="mt-4 inline-block font-semibold text-[#A9533D] underline" href="/admin">
             Tilbake til adminpanelet
           </Link>
         </div>
@@ -108,25 +108,26 @@ export default async function AdminBooksPage({
   }
 
   return (
-    <main className="min-h-screen bg-[var(--main)] px-6 py-10 text-gray-900">
+    <main className="min-h-full flex-1 bg-[#E7DCE8] px-6 py-10 text-[#331F2E] sm:py-14">
       <div className="mx-auto max-w-6xl">
         {/* Shared navigation link back to the admin dashboard. */}
         <AdminBackLink />
 
         {/* Page heading and shortcut to add a new book. */}
-        <div className="mt-6 flex flex-wrap items-center justify-between gap-4">
+        <div className="mt-6 flex flex-wrap items-end justify-between gap-5">
           <div>
-            <h1 className="text-3xl font-bold text-white">
-              Administrer månedens bok
+            <p className="text-sm font-semibold uppercase tracking-[0.16em] text-[#A9533D]">Boksamlingen</p>
+            <h1 className="mt-2 font-display text-3xl font-semibold text-[#331F2E] sm:text-4xl">
+              Administrer bøker
             </h1>
-            <p className="mt-2 text-white/80">
-              Administrer månedens bok og arkivet. Søk og bla gjennom 25 bøker om gangen.
+            <p className="mt-2 text-[#5C3C54]">
+              Velg månedens bok, oppdater bokdetaljer eller bla gjennom arkivet.
             </p>
           </div>
 
           <Link
             href="/admin/books/new"
-            className="rounded-xl bg-white px-5 py-3 font-semibold shadow-sm hover:shadow-md"
+            className="rounded-xl bg-[#331F2E] px-5 py-3 font-semibold text-white shadow-sm transition hover:bg-[#5C3C54] hover:shadow-md"
           >
             + Legg til bok
           </Link>

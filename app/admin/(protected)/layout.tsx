@@ -2,6 +2,7 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
 import { createClient } from "@/supabase/server";
+import AdminNavigation from "./AdminNavigation";
 
 export default async function ProtectedAdminLayout({
   children,
@@ -23,5 +24,10 @@ export default async function ProtectedAdminLayout({
     redirect("/admin/login");
   }
 
-  return <>{children}</>;
+  return (
+    <div className="flex min-h-full flex-1 flex-col bg-[#E7DCE8]">
+      <AdminNavigation />
+      <div className="flex flex-1 flex-col">{children}</div>
+    </div>
+  );
 }

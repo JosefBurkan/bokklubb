@@ -39,24 +39,24 @@ export default async function EditEventPage({ params }: EditEventPageProps) {
     console.error("Could not fetch event:", error?.message);
 
     return (
-      <main className="min-h-screen bg-[var(--main)] px-6 py-10">
+      <main className="min-h-full flex-1 bg-[#E7DCE8] px-6 py-10 text-[#331F2E] sm:py-14">
         <div className="mx-auto max-w-3xl">
           {/* Explain the missing event and provide a way back to the list. */}
           <div className="mb-6">
             <Link
               href="/admin/events"
-              className="text-sm font-medium text-white/80 hover:text-white"
+              className="text-sm font-semibold text-[#6A465E] underline decoration-[#C99B72] underline-offset-4 hover:text-[#A9533D]"
             >
               ← Tilbake til eventer
             </Link>
-            <h1 className="mt-4 text-3xl font-bold text-white">Fant ikke eventet</h1>
-            <p className="mt-2 text-white/80">
+            <h1 className="mt-4 font-display text-3xl font-semibold text-[#331F2E]">Fant ikke eventet</h1>
+            <p className="mt-2 text-[#5C3C54]">
               Eventet finnes ikke eller kunne ikke hentes.
             </p>
           </div>
           <Link
             href="/admin/events"
-            className="inline-flex rounded-lg bg-white px-5 py-3 font-semibold text-gray-900 hover:bg-gray-100"
+            className="inline-flex rounded-lg bg-[#331F2E] px-5 py-3 font-semibold text-white hover:bg-[#5C3C54]"
           >
             Tilbake til eventer
           </Link>
@@ -66,18 +66,19 @@ export default async function EditEventPage({ params }: EditEventPageProps) {
   }
 
   return (
-    <main className="min-h-screen bg-[var(--main)] px-6 py-10 text-gray-900">
+    <main className="min-h-full flex-1 bg-[#E7DCE8] px-6 py-10 text-[#331F2E] sm:py-14">
       <div className="mx-auto max-w-3xl">
         {/* Navigation and heading for the edit-event page. */}
         <div className="mb-8">
           <Link
             href="/admin"
-            className="text-sm font-medium text-white/80 hover:text-white"
+            className="text-sm font-semibold text-[#6A465E] underline decoration-[#C99B72] underline-offset-4 hover:text-[#A9533D]"
           >
             ← Tilbake til adminpanel
           </Link>
-          <h1 className="mt-4 text-3xl font-bold text-white">Rediger event</h1>
-          <p className="mt-2 text-white/80">Endre informasjonen om dette eventet.</p>
+          <p className="text-sm font-semibold uppercase tracking-[0.16em] text-[#A9533D]">Bokklubbens kalender</p>
+          <h1 className="mt-2 font-display text-3xl font-semibold text-[#331F2E] sm:text-4xl">Rediger arrangement</h1>
+          <p className="mt-2 text-[#5C3C54]">Endre tid, beskrivelse eller kategori.</p>
         </div>
         {/* Shared form prefilled with the event loaded above. */}
         <EventForm

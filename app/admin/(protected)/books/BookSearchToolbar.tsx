@@ -54,7 +54,7 @@ export default function BookSearchToolbar({ search, sort }: BookSearchToolbarPro
   return (
     <div className="mt-8 max-w-3xl">
       {/* Search field and sort selector for the collection below. */}
-      <label htmlFor="book-search" className="mb-2 block font-semibold text-white">
+      <label htmlFor="book-search" className="mb-2 block font-semibold text-[#331F2E]">
         Søk etter bøker
       </label>
       <div className="flex flex-wrap gap-2">
@@ -70,7 +70,7 @@ export default function BookSearchToolbar({ search, sort }: BookSearchToolbarPro
             }
           }}
           placeholder="Søk på tittel eller beskrivelse"
-          className="min-w-0 flex-1 basis-64 rounded-xl border border-gray-300 bg-white px-4 py-3 text-gray-900 outline-none focus:border-black focus:ring-2 focus:ring-black/20"
+          className="min-w-0 flex-1 basis-64 rounded-xl border border-[#331F2E]/20 bg-white px-4 py-3 text-[#331F2E] outline-none focus:border-[#A9533D] focus:ring-2 focus:ring-[#A9533D]/15"
         />
         {/* Screen-reader label; the visible label is the select's option text. */}
         <label htmlFor="book-sort" className="sr-only">
@@ -82,7 +82,7 @@ export default function BookSearchToolbar({ search, sort }: BookSearchToolbarPro
           onChange={(event) =>
             handleSortChange(event.target.value as "name" | "created_at")
           }
-          className="rounded-xl border border-gray-300 bg-white px-3 py-3 text-gray-900 outline-none focus:border-black focus:ring-2 focus:ring-black/20"
+          className="rounded-xl border border-[#331F2E]/20 bg-white px-3 py-3 text-[#331F2E] outline-none focus:border-[#A9533D] focus:ring-2 focus:ring-[#A9533D]/15"
         >
           <option value="created_at">Dato registrert (nyeste først)</option>
           <option value="name">Tittel (A–Å)</option>
@@ -91,7 +91,7 @@ export default function BookSearchToolbar({ search, sort }: BookSearchToolbarPro
         {search && (
           <Link
             href="/admin/books"
-            className="inline-flex items-center rounded-xl border border-white/40 px-4 py-3 font-semibold text-white hover:bg-white/10"
+            className="inline-flex items-center rounded-xl border border-[#331F2E]/20 bg-white px-4 py-3 font-semibold text-[#331F2E] hover:bg-[#F6E5DD]"
           >
             Nullstill
           </Link>

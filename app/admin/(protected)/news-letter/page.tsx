@@ -3,15 +3,16 @@ import NewsletterComposer from "@/app/components/NewsletterComposer";
 
 export default function NewsletterPage() {
   return (
-    <main className="min-h-screen bg-[var(--main)] px-6 py-10 text-gray-900">
+    <main className="min-h-full flex-1 bg-[#E7DCE8] px-6 py-10 text-[#331F2E] sm:py-14">
       <div className="mx-auto max-w-6xl">
         {/* Shared link back to the admin dashboard. */}
         <AdminBackLink />
 
         {/* Introductory title and instructions for the newsletter editor. */}
         <header className="mb-8 mt-6">
-          <h1 className="text-3xl font-bold text-white">Nyhetsbrev</h1>
-          <p className="mt-2 text-white/80">
+          <p className="text-sm font-semibold uppercase tracking-[0.16em] text-[#A9533D]">Bokklubbens stemme</p>
+          <h1 className="mt-2 font-display text-3xl font-semibold text-[#331F2E] sm:text-4xl">Nyhetsbrev</h1>
+          <p className="mt-2 text-[#5C3C54]">
             Skriv og utform e-posten, se en forhåndsvisning, og send den til medlemmene.
           </p>
         </header>

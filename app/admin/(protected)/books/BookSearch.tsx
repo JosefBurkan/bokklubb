@@ -59,7 +59,7 @@ export default function BookSearch({
     <>
       {/* The active book stays visible even when the collection is filtered. */}
       <section className="mt-8">
-        <h2 className="mb-4 text-xl font-bold text-white">Nåværende bok</h2>
+        <h2 className="mb-4 font-display text-xl font-semibold text-[#331F2E]">Månedens bok</h2>
 
         {currentBook ? (
           <div className="flex flex-col gap-5 rounded-2xl bg-white p-6 sm:flex-row">
@@ -95,7 +95,7 @@ export default function BookSearch({
             </div>
           </div>
         ) : (
-          <p className="rounded-2xl bg-white p-6">Ingen aktiv bok er valgt.</p>
+          <p className="rounded-2xl border border-[#331F2E]/10 bg-white p-6 text-[#5C3C54] shadow-sm">Ingen aktiv bok er valgt.</p>
         )}
       </section>
 
@@ -106,14 +106,14 @@ export default function BookSearch({
       <section className="mt-10">
         <div className="mb-4 flex flex-wrap items-end justify-between gap-3">
           <div>
-            <h2 className="text-xl font-bold text-white">Bøker i samlingen</h2>
+            <h2 className="font-display text-xl font-semibold text-[#331F2E]">Bøker i samlingen</h2>
             {search && (
-              <p className="mt-1 text-sm text-white/80">
+              <p className="mt-1 text-sm text-[#6A5A65]">
                 Søker etter «{search}»
               </p>
             )}
           </div>
-          <p className="text-sm text-white/80" aria-live="polite">
+          <p className="text-sm text-[#6A5A65]" aria-live="polite">
             {firstResult}–{lastResult} av {totalCount} bøker
           </p>
         </div>
@@ -213,7 +213,7 @@ export default function BookSearch({
             ) : (
               <span />
             )}
-            <span className="text-sm text-white/90">
+            <span className="text-sm font-medium text-[#5C3C54]">
               Side {page} av {totalPages}
             </span>
             {page < totalPages ? (

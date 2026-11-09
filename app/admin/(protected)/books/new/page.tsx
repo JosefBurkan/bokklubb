@@ -56,24 +56,25 @@ export default function BookForm() {
   }
 
   return (
-    <main className="min-h-screen bg-[var(--main)] px-6 py-10 text-gray-900">
+    <main className="min-h-full flex-1 bg-[#E7DCE8] px-6 py-10 text-[#331F2E] sm:py-14">
       <div className="mx-auto max-w-3xl">
         {/* Back link and page title. */}
-        <Link href="/admin/books" className="text-sm text-white/80 underline hover:text-white">
+        <Link href="/admin/books" className="text-sm font-semibold text-[#6A465E] underline decoration-[#C99B72] underline-offset-4 hover:text-[#A9533D]">
           ← Tilbake til bokadministrasjon
         </Link>
 
-        <h1 className="mt-6 text-3xl font-bold text-white">
-          Legg til bok
+        <p className="mt-6 text-sm font-semibold uppercase tracking-[0.16em] text-[#A9533D]">Boksamlingen</p>
+        <h1 className="mt-2 font-display text-3xl font-semibold text-[#331F2E] sm:text-4xl">
+          Legg til en bok
         </h1>
-        <p className="mt-2 text-white/80">
+        <p className="mt-2 text-[#5C3C54]">
           Legg inn informasjon og omslagsbilde for en ny bok.
         </p>
 
         {/* New book fields and cover image upload. */}
         <form
           onSubmit={handleSubmit}
-          className="mt-8 space-y-6 rounded-2xl bg-white p-6 shadow-sm"
+          className="mt-8 space-y-6 rounded-2xl border border-[#331F2E]/10 bg-white p-6 shadow-sm sm:p-8"
         >
           <div>
             <label
@@ -155,7 +156,7 @@ export default function BookForm() {
             <button
               type="submit"
               disabled={loading}
-              className="rounded-xl bg-[var(--header)] px-5 py-3 font-semibold text-white disabled:opacity-50"
+              className="rounded-xl bg-[#331F2E] px-5 py-3 font-semibold text-white transition hover:bg-[#5C3C54] disabled:opacity-50"
             >
               {loading ? "Lagrer..." : "Lagre bok"}
             </button>
