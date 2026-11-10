@@ -9,11 +9,7 @@ export default function Footer() {
           ========================= */}
   
           <div className="grid grid-cols-1 gap-10 text-center md:grid-cols-3">
-  
-            {/* =========================
-                STORE
-            ========================= */}
-  
+    
             <div>
               <h3 className="text-base font-bold">
                 Lesely
@@ -24,9 +20,6 @@ export default function Footer() {
               </p>
   
   
-              {/* =========================
-              SOCIAL MEDIA
-              ========================= */}
   
       <div className="mt-6">
         <p className="mb-4 text-xs font-semibold uppercase tracking-wider text-white/70">
@@ -35,11 +28,11 @@ export default function Footer() {
       
         <div className="flex items-center justify-center gap-4">
       
-          {/* Facebook */}
+          {/* Discord */}
           <a
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="Besøk Merkatå Bruktbutikk på Facebook"
+            aria-label="Besøk Discorden vår her"
             className="
               flex
               h-13
@@ -62,7 +55,7 @@ export default function Footer() {
             <img
               src="/discord.svg"
               alt=""
-              className="h-12 w-12 object-contain"
+              className="h-9 w-9 object-contain"
             />
           </a>
       
@@ -102,7 +95,7 @@ export default function Footer() {
             <div className="flex flex-col items-center justify-center gap-2 text-center text-xs text-white/45 sm:flex-row sm:gap-6">
   
               <p>
-                © 2026 Merkatá Bruktbutikk. Alle rettigheter reservert.
+                © 2026 LeseLy Bruktbutikk. Alle rettigheter reservert.
               </p>
   
               <span className="hidden text-white/20 sm:inline">

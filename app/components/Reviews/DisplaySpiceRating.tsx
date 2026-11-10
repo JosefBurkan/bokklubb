@@ -10,13 +10,13 @@ export default function DisplaySpiceRating({ value }: { value: number }) {
           return (
             <span key={star} className="grid text-4xl leading-none">
                 <span
-                className="col-start-1 row-start-1 text-sm"
+                className="col-start-1 row-start-1 text-xs"
                 style={{ filter: "grayscale(1) brightness(0.5)" }}
                 >
                 🌶️
                 </span>
                 <span
-                className="col-start-1 row-start-1 text-sm"
+                className="col-start-1 row-start-1 text-xs"
                 style={{ clipPath: `inset(0 ${(1 - fill) * 100}% 0 0)` }}
                 >
                 🌶️

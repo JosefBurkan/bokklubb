@@ -13,7 +13,7 @@ const VALID_CATEGORIES = [
 
 // GET /api/events
 // Returns all events.
-export async function GET() {
+export async function events() {
   const cookieStore = await cookies();
   const supabase = createClient(cookieStore);
 
