@@ -59,13 +59,15 @@ export async function POST(request: Request) {
   // Validate required fields.
   if (
     !body.date ||
+    typeof body.title !== "string" ||
+    !body.title.trim() ||
     !body.description ||
     !body.category
   ) {
     return Response.json(
       {
         error:
-          "Dato, beskrivelse og kategori er påkrevd",
+          "Dato, tittel, beskrivelse og kategori er påkrevd",
       },
       { status: 400 }
     );
@@ -83,6 +85,7 @@ export async function POST(request: Request) {
     .from("eventer")
     .insert({
       date: body.date,
+      title: body.title.trim(),
       description: body.description,
       category: body.category,
       listOfParticipants: [],
@@ -97,10 +100,16 @@ export async function POST(request: Request) {
     );
   }
 
-  await sendDiscordEvent(
-    `En ny event er opprettet!`,
-    `${body.description}`
-  );
+  // The event is already saved, so a Discord outage or missing configuration
+  // should not make the client think creation failed and submit it twice.
+  try {
+    await sendDiscordEvent(
+      body.title.trim(),
+      body.description,
+    );
+  } catch (notificationError) {
+    console.warn("Event saved, but the Discord notification was not sent:", notificationError);
+  }
 
   return Response.json(data, { status: 201 });
 }

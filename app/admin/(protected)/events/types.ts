@@ -2,6 +2,7 @@
 export type Event = {
   id: number;
   date: string;
+  title: string | null;
   description: string;
   category: string;
   listOfParticipants: string[] | null;

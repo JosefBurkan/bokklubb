@@ -2,6 +2,7 @@ import "./globals.css";
 
 import Footer from "./components/Footer";
 import Header from "./components/Header";
+import AppChrome from "./components/AppChrome";
 
 export default function RootLayout({
   children,
@@ -12,13 +13,9 @@ export default function RootLayout({
     <html lang="no">
       <body className="flex min-h-screen flex-col bg-page text-gray-900">
 
-        <Header />
-        
-        <div className="flex flex-1 flex-col bg-page-gradient">
+        <AppChrome siteHeader={<Header />} siteFooter={<Footer />}>
           {children}
-        </div>
-
-        <Footer />
+        </AppChrome>
       </body>
     </html>
   );

@@ -21,7 +21,7 @@ export default async function EventDetailsPage({ params }: EventDetailsPageProps
   const supabase = createClient(cookieStore);
   const { data: event, error } = await supabase
     .from("eventer")
-    .select("id, date, description, category, listOfParticipants")
+    .select("id, date, title, description, category, listOfParticipants")
     .eq("id", id)
     .maybeSingle();
 
@@ -53,23 +53,27 @@ export default async function EventDetailsPage({ params }: EventDetailsPageProps
     : event.listOfParticipants ?? [];
 
   return (
-    <main className="min-h-screen bg-[var(--main)] px-6 py-10 text-gray-900">
+    <main className="min-h-full flex-1 bg-[#E2D9D0] px-6 py-10 text-[#331F2E] sm:py-14">
       <div className="mx-auto max-w-4xl">
         {/* Return to the event collection. */}
         <Link
           href="/admin/events"
-          className="text-sm font-medium text-white/80 hover:text-white"
+          className="text-sm font-semibold text-[#6A465E] underline decoration-[#C99B72] underline-offset-4 hover:text-[#A9533D]"
         >
           ← Tilbake til eventer
         </Link>
 
         {/* Event details and the number of names currently registered. */}
         <header className="mb-8 mt-6">
-          <h1 className="text-3xl font-bold text-white">{event.description}</h1>
-          <p className="mt-2 text-white/80">
+          <p className="text-sm font-semibold uppercase tracking-[0.16em] text-[#A9533D]">Arrangementsdetaljer</p>
+          <h1 className="mt-2 font-display text-3xl font-semibold text-[#331F2E] sm:text-4xl">{event.title?.trim() || event.description}</h1>
+          {event.title?.trim() && event.description && event.title !== event.description && (
+            <p className="mt-2 text-[#5C3C54]">{event.description}</p>
+          )}
+          <p className="mt-2 text-[#5C3C54]">
             {new Date(event.date).toLocaleString("no-NO")} · {event.category}
           </p>
-          <p className="mt-2 text-white/80">
+          <p className="mt-2 text-sm font-semibold text-[#5C3C54]">
             {participants.length} {participants.length === 1 ? "påmeldt" : "påmeldte"}
           </p>
         </header>
@@ -77,10 +81,10 @@ export default async function EventDetailsPage({ params }: EventDetailsPageProps
         {/* Names added through the event signup form. */}
         <section>
           <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
-            <h2 className="text-xl font-semibold text-white">Påmeldte deltakere</h2>
+            <h2 className="font-display text-xl font-semibold text-[#331F2E]">Påmeldte deltakere</h2>
             <Link
               href={`/admin/events/${event.id}/edit`}
-              className="rounded-lg bg-white px-4 py-2 font-semibold text-gray-900 hover:bg-gray-100"
+              className="rounded-lg border border-[#B8A8A0] bg-[#FFFCF7] px-4 py-2 font-semibold text-[#331F2E] hover:bg-[#F0E7DE]"
             >
               Rediger event
             </Link>

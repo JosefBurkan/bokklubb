@@ -49,7 +49,7 @@ export default async function EditBookPage({
   // Fetch the book being edited.
   const { data: book, error: bookError } = await supabase
     .from("Books")
-    .select("id, name, description, cloudinaryPath, active")
+    .select("id, name, author, description, cloudinaryPath, active")
     .eq("id", id)
     .maybeSingle();
 
@@ -57,20 +57,20 @@ export default async function EditBookPage({
     console.error("Could not fetch book:", bookError.message);
 
     return (
-      <main className="min-h-screen bg-[var(--main)] px-6 py-10 text-gray-900">
-        <div className="mx-auto max-w-3xl rounded-2xl bg-white p-6">
+      <main className="min-h-full flex-1 bg-[#E2D9D0] px-6 py-10 text-[#331F2E] sm:py-14">
+        <div className="mx-auto max-w-3xl rounded-2xl border border-[#D0C1B5] bg-[#F7F1E9] p-6 shadow-[0_4px_16px_rgba(51,31,46,0.06)]">
           {/* Explain the load failure and offer a way back to the book list. */}
-          <h1 className="text-2xl font-bold">
+          <h1 className="font-display text-2xl font-semibold text-[#331F2E]">
             Kunne ikke hente boka
           </h1>
 
-          <p className="mt-3 text-gray-600">
+          <p className="mt-3 text-[#5C3C54]">
             {bookError.message}
           </p>
 
           <Link
             href="/admin/books"
-            className="mt-6 inline-block underline"
+            className="mt-6 inline-block font-semibold text-[#A9533D] underline"
           >
             ← Tilbake til bokadministrasjon
           </Link>
@@ -103,6 +103,7 @@ export default async function EditBookPage({
     }
 
     const name = String(formData.get("name") ?? "").trim();
+    const author = String(formData.get("author") ?? "").trim();
     const description = String(
       formData.get("description") ?? "",
     ).trim();
@@ -111,6 +112,10 @@ export default async function EditBookPage({
 
     if (!name || name.length > 200) {
       throw new Error("Boktittelen må være mellom 1 og 200 tegn.");
+    }
+
+    if (author.length > 200) {
+      throw new Error("Forfatternavnet kan ikke være lengre enn 200 tegn.");
     }
 
     if (!description || description.length > 10000) {
@@ -138,10 +143,12 @@ export default async function EditBookPage({
 
     const updates: {
       name: string;
+      author: string | null;
       description: string;
       cloudinaryPath?: string;
     } = {
       name,
+      author: author || null,
       description,
     };
 
@@ -238,23 +245,24 @@ export default async function EditBookPage({
   }
 
   return (
-    <main className="min-h-screen bg-[var(--main)] px-6 py-10 text-gray-900">
+    <main className="min-h-full flex-1 bg-[#E2D9D0] px-6 py-10 text-[#331F2E] sm:py-14">
       <div className="mx-auto max-w-3xl">
 
         {/* Back link and title for the edit page. */}
         <div className="mb-8">
           <Link
             href="/admin/books"
-            className="text-sm font-medium text-white/80 hover:text-white"
+            className="text-sm font-semibold text-[#6A465E] underline decoration-[#C99B72] underline-offset-4 hover:text-[#A9533D]"
           >
             ← Tilbake til bokadministrasjon
           </Link>
 
-          <h1 className="mt-4 text-3xl font-bold text-white">
+          <p className="mt-6 text-sm font-semibold uppercase tracking-[0.16em] text-[#A9533D]">Boksamlingen</p>
+          <h1 className="mt-2 font-display text-3xl font-semibold text-[#331F2E] sm:text-4xl">
             Rediger bok
           </h1>
 
-          <p className="mt-2 text-white/80">
+          <p className="mt-2 text-[#5C3C54]">
             Endre bokinformasjonen eller bytt omslagsbilde.
           </p>
         </div>
@@ -262,7 +270,7 @@ export default async function EditBookPage({
         {/* Server Action submits the edited fields and optional replacement cover. */}
         <form
   action={updateBook}
-  className="rounded-2xl bg-white p-6 shadow-sm"
+  className="rounded-2xl border border-[#D0C1B5] bg-[#F7F1E9] p-6 shadow-[0_4px_16px_rgba(51,31,46,0.06)] sm:p-8"
 >
           {/* Book title field. */}
           <div className="mb-6">
@@ -285,14 +293,32 @@ export default async function EditBookPage({
                 w-full
                 rounded-lg
                 border
-                border-gray-300
+                border-[#B8A8A0]
+                bg-[#FFFCF7]
                 px-4
-                text-gray-900
+                text-[#331F2E]
                 outline-none
-                focus:border-orange-500
+                placeholder:text-[#75636F]
+                focus:border-[#A9533D]
                 focus:ring-2
-                focus:ring-orange-200
+                focus:ring-[#A9533D]/20
               "
+            />
+          </div>
+
+          {/* Author is optional because older books may not have this information. */}
+          <div className="mb-6">
+            <label htmlFor="author" className="mb-2 block text-sm font-semibold">
+              Forfatter <span className="font-normal text-[#5D4B57]">(valgfritt)</span>
+            </label>
+            <input
+              id="author"
+              name="author"
+              type="text"
+              defaultValue={book.author ?? ""}
+              maxLength={200}
+              placeholder="Skriv inn forfatterens navn"
+              className="h-11 w-full rounded-lg border border-[#B8A8A0] bg-[#FFFCF7] px-4 text-[#331F2E] outline-none placeholder:text-[#75636F] focus:border-[#A9533D] focus:ring-2 focus:ring-[#A9533D]/20"
             />
           </div>
 
@@ -316,14 +342,16 @@ export default async function EditBookPage({
                 w-full
                 rounded-lg
                 border
-                border-gray-300
+                border-[#B8A8A0]
+                bg-[#FFFCF7]
                 px-4
                 py-3
-                text-gray-900
+                text-[#331F2E]
                 outline-none
-                focus:border-orange-500
+                placeholder:text-[#75636F]
+                focus:border-[#A9533D]
                 focus:ring-2
-                focus:ring-orange-200
+                focus:ring-[#A9533D]/20
               "
             />
           </div>
@@ -341,7 +369,7 @@ export default async function EditBookPage({
                 className="mb-4 max-h-64 w-40 rounded-lg object-contain"
               />
             ) : (
-              <p className="mb-4 text-sm text-gray-500">
+              <p className="mb-4 text-sm text-[#5D4B57]">
                 Ingen omslagsbilde er registrert.
               </p>
             )}
@@ -363,14 +391,15 @@ export default async function EditBookPage({
                 w-full
                 rounded-lg
                 border
-                border-gray-300
+                border-[#B8A8A0]
+                bg-[#FFFCF7]
                 p-3
                 text-sm
-                text-gray-900
+                text-[#331F2E]
               "
             />
 
-            <p className="mt-2 text-sm text-gray-500">
+            <p className="mt-2 text-sm text-[#5D4B57]">
               JPG, PNG eller WebP. Maksimalt 5 MB.
               La feltet stå tomt for å beholde bildet.
             </p>
@@ -383,13 +412,14 @@ export default async function EditBookPage({
               className="
                 rounded-lg
                 border
-                border-gray-300
-                bg-white
+                border-[#B8A8A0]
+                bg-[#FFFCF7]
                 px-5
                 py-3
                 font-semibold
-                text-gray-700
-                hover:bg-gray-50
+                font-semibold
+                text-[#331F2E]
+                hover:bg-[#F0E7DE]
               "
             >
               Avbryt
@@ -399,13 +429,13 @@ export default async function EditBookPage({
               type="submit"
               className="
                 rounded-lg
-                bg-black
+                bg-[#331F2E]
                 px-5
                 py-3
                 font-semibold
                 text-white
                 transition
-                hover:bg-gray-700
+                hover:bg-[#5C3C54]
               "
             >
               Lagre endringer

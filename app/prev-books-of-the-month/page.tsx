@@ -65,6 +65,7 @@ export default async function prevBooksOfTheMonth() {
                                     alt={book.name}
                                 />
 
+
                                 <div className="flex min-w-0 flex-col gap-3 ml-5">
                                     <h3 className="text-xl font-bold">{book.name}</h3>
                                     <p>{book.description}</p>
@@ -122,4 +123,3 @@ export default async function prevBooksOfTheMonth() {
         </div>
     );
 }
-  

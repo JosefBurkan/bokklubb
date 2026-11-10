@@ -83,22 +83,41 @@ export default async function Home() {
             <div className="mt-auto flex items-end justify-between gap-4">
               <div className="min-w-0 text-left">
                 <h1 className="font-display text-xl pb-3">Månedens bok</h1>
-                <p className="font-bold">{book.name}</p>
-                <p className="pb-5">{book.author}</p>
-
-                <Link
-                  href="/book-of-the-month"
-                  className="underline text-[#85597A]">
-                  Les mer →
-                </Link>
+                {book ? (
+                  <>
+                    <p className="font-bold">{book.name}</p>
+                    {book.author && <p className="pb-5">{book.author}</p>}
+                    <Link
+                      href="/book-of-the-month"
+                      className="underline text-[#85597A]"
+                    >
+                      Les mer →
+                    </Link>
+                  </>
+                ) : (
+                  <>
+                    <p className="pb-5">
+                      {bookData.error
+                        ? "Månedens bok kunne ikke hentes akkurat nå."
+                        : "Ingen månedens bok er valgt akkurat nå."}
+                    </p>
+                    <Link
+                      href="/prev-books-of-the-month"
+                      className="underline text-[#85597A]"
+                    >
+                      Se tidligere bøker →
+                    </Link>
+                  </>
+                )}
               </div>
 
-
-              <img
-                src={book.cloudinaryPath}
-                alt={`Omslag: ${book.name}`}
-                className="max-w-28 shrink-0 rounded-sm"
-              />
+              {book?.cloudinaryPath && (
+                <img
+                  src={book.cloudinaryPath}
+                  alt={`Omslag: ${book.name}`}
+                  className="max-w-28 shrink-0 rounded-sm"
+                />
+              )}
 
             </div>
           </div>

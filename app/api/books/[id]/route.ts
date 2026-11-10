@@ -246,6 +246,7 @@ export async function PATCH(
   }
 
   const name = formData.get("name");
+  const author = formData.get("author");
   const description = formData.get("description");
   const imageEntry = formData.get("image");
 
@@ -267,6 +268,13 @@ export async function PATCH(
   ) {
     return NextResponse.json(
       { error: "Oppgi en beskrivelse på maks 10 000 tegn." },
+      { status: 400 },
+    );
+  }
+
+  if (author !== null && (typeof author !== "string" || author.trim().length > 200)) {
+    return NextResponse.json(
+      { error: "Forfatternavnet kan ikke være lengre enn 200 tegn." },
       { status: 400 },
     );
   }
@@ -308,10 +316,12 @@ export async function PATCH(
   try {
     const updates: {
       name: string;
+      author: string | null;
       description: string;
       cloudinaryPath?: string;
     } = {
       name: name.trim(),
+      author: typeof author === "string" && author.trim() ? author.trim() : null,
       description: description.trim(),
     };
 

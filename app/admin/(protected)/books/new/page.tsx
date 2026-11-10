@@ -9,6 +9,7 @@ import Link from "next/link";
 export default function BookForm() {
   const router = useRouter();
   const [name, setName] = useState("");
+  const [author, setAuthor] = useState("");
   const [description, setDescription] = useState("");
   const [image, setImage] = useState<File | null>(null);
   const [error, setError] = useState("");
@@ -28,6 +29,7 @@ export default function BookForm() {
     // FormData is used because the request includes an image file upload.
     const formData = new FormData();
     formData.append("name", name);
+    formData.append("author", author);
     formData.append("description", description);
     formData.append("image", image);
 
@@ -56,24 +58,25 @@ export default function BookForm() {
   }
 
   return (
-    <main className="min-h-screen bg-[var(--main)] px-6 py-10 text-gray-900">
+    <main className="min-h-full flex-1 bg-[#E2D9D0] px-6 py-10 text-[#331F2E] sm:py-14">
       <div className="mx-auto max-w-3xl">
         {/* Back link and page title. */}
-        <Link href="/admin/books" className="text-sm text-white/80 underline hover:text-white">
+        <Link href="/admin/books" className="text-sm font-semibold text-[#6A465E] underline decoration-[#C99B72] underline-offset-4 hover:text-[#A9533D]">
           ← Tilbake til bokadministrasjon
         </Link>
 
-        <h1 className="mt-6 text-3xl font-bold text-white">
-          Legg til bok
+        <p className="mt-6 text-sm font-semibold uppercase tracking-[0.16em] text-[#A9533D]">Boksamlingen</p>
+        <h1 className="mt-2 font-display text-3xl font-semibold text-[#331F2E] sm:text-4xl">
+          Legg til en bok
         </h1>
-        <p className="mt-2 text-white/80">
+        <p className="mt-2 text-[#5C3C54]">
           Legg inn informasjon og omslagsbilde for en ny bok.
         </p>
 
         {/* New book fields and cover image upload. */}
         <form
           onSubmit={handleSubmit}
-          className="mt-8 space-y-6 rounded-2xl bg-white p-6 shadow-sm"
+          className="mt-8 space-y-6 rounded-2xl border border-[#D0C1B5] bg-[#F7F1E9] p-6 shadow-[0_4px_16px_rgba(51,31,46,0.06)] sm:p-8"
         >
           <div>
             <label
@@ -89,8 +92,23 @@ export default function BookForm() {
               onChange={(event) => setName(event.target.value)}
               required
               maxLength={200}
-              className="w-full rounded-lg border border-gray-300 px-4 py-3"
+              className="w-full rounded-lg border border-[#B8A8A0] bg-[#FFFCF7] px-4 py-3 text-[#331F2E] placeholder:text-[#75636F] outline-none focus:border-[#A9533D] focus:ring-2 focus:ring-[#A9533D]/20"
               placeholder="Skriv inn boktittelen"
+            />
+          </div>
+
+          <div>
+            <label htmlFor="author" className="mb-2 block font-semibold">
+              Forfatter <span className="font-normal text-[#5D4B57]">(valgfritt)</span>
+            </label>
+            <input
+              id="author"
+              name="author"
+              value={author}
+              onChange={(event) => setAuthor(event.target.value)}
+              maxLength={200}
+              className="w-full rounded-lg border border-[#B8A8A0] bg-[#FFFCF7] px-4 py-3 text-[#331F2E] placeholder:text-[#75636F] outline-none focus:border-[#A9533D] focus:ring-2 focus:ring-[#A9533D]/20"
+              placeholder="Skriv inn forfatterens navn"
             />
           </div>
 
@@ -109,7 +127,7 @@ export default function BookForm() {
               required
               maxLength={10000}
               rows={5}
-              className="w-full rounded-lg border border-gray-300 px-4 py-3"
+              className="w-full rounded-lg border border-[#B8A8A0] bg-[#FFFCF7] px-4 py-3 text-[#331F2E] placeholder:text-[#75636F] outline-none focus:border-[#A9533D] focus:ring-2 focus:ring-[#A9533D]/20"
               placeholder="Skriv en kort beskrivelse av boka"
             />
           </div>
@@ -130,14 +148,14 @@ export default function BookForm() {
               onChange={(event) =>
                 setImage(event.target.files?.[0] ?? null)
               }
-              className="block w-full rounded-lg border border-gray-300 p-3"
+              className="block w-full rounded-lg border border-[#B8A8A0] bg-[#FFFCF7] p-3 text-[#331F2E]"
             />
-            <p className="mt-2 text-sm text-gray-500">
+            <p className="mt-2 text-sm text-[#5D4B57]">
               JPG, PNG eller WebP. Maksimalt 5 MB.
             </p>
 
             {image && (
-              <p className="mt-2 text-sm text-gray-600">
+              <p className="mt-2 text-sm text-[#594653]">
                 Valgt fil: {image.name}
               </p>
             )}
@@ -155,21 +173,21 @@ export default function BookForm() {
             <button
               type="submit"
               disabled={loading}
-              className="rounded-xl bg-[var(--header)] px-5 py-3 font-semibold text-white disabled:opacity-50"
+              className="rounded-xl bg-[#331F2E] px-5 py-3 font-semibold text-white transition hover:bg-[#5C3C54] disabled:opacity-50"
             >
               {loading ? "Lagrer..." : "Lagre bok"}
             </button>
 
             <Link
               href="/admin/books"
-              className="rounded-xl border border-gray-300 px-5 py-3 font-semibold"
+              className="rounded-xl border border-[#B8A8A0] bg-[#FFFCF7] px-5 py-3 font-semibold text-[#331F2E] hover:bg-[#F0E7DE]"
             >
               Avbryt
             </Link>
           </div>
 
           {/* New books are initially archived; activation is a separate action. */}
-          <p className="text-sm text-gray-500">
+          <p className="text-sm text-[#5D4B57]">
             Den nye boka lagres som arkivert. Du kan aktivere den
             som månedens bok etterpå.
           </p>

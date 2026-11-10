@@ -54,8 +54,11 @@ export default async function Events({
             action={registerForEvent}
             className="ml-10 w-full rounded bg-gray-500"
           >
-            {/* Event description */}
-            {event.description}
+            {/* Show the event's title separately from its longer description. */}
+            <h1>{event.title?.trim() || event.description}</h1>
+            {event.title?.trim() && event.description && event.title !== event.description && (
+              <p>{event.description}</p>
+            )}
 
             {/* Store the event ID so the
                 server action knows which event

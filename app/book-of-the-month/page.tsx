@@ -22,20 +22,37 @@ export default async function Manedens_Bok() {
     const displayName = user?.user_metadata?.name;
 
     console.log(`navnet til brukeren er ${displayName}`)
-  
+
     // Hent den aktive boka her
     // Aktiv betyr månedens bok
     const { data: book, error } = await supabase
         .from("Books")
         .select("*")
         .eq("active", true)
-        .single();
+        .maybeSingle();
   
     if (error) {
       console.error(
-        "Error fetching events:",
+        "Error fetching monthly book:",
         error
       );
+    }
+
+    // The admin can remove the monthly book, so show a useful empty state instead of dereferencing null.
+    if (!book) {
+        return (
+            <main className="mx-auto max-w-6xl px-6 py-16">
+                <h1 className="text-4xl font-bold text-black">Månedens bok</h1>
+                <p className="mt-4 text-gray-700">
+                    {error
+                        ? "Månedens bok kunne ikke hentes akkurat nå."
+                        : "Ingen månedens bok er valgt akkurat nå."}
+                </p>
+                <Link href="/prev-books-of-the-month" className="mt-6 inline-block underline">
+                    Se tidligere bøker →
+                </Link>
+            </main>
+        );
     }
 
     const { data: reviews } = await supabase
@@ -43,13 +60,8 @@ export default async function Manedens_Bok() {
         .select("*")
         .eq("book_id", book.id)
         .limit(2);
-    
-    if (error) {
-        console.error(
-            "Error fetching events:",
-            error
-        );
-    }
+
+    const bookReviews = reviews ?? [];
   
     console.log(book);
     console.log(reviews);
@@ -77,6 +89,7 @@ export default async function Manedens_Bok() {
             <div key={book.id} className="flex w-full  items-start justify-between p-5">
                 <div className="text-left">
                     <h2 className="text-2xl font-bold">{book.name}</h2>
+                    {book.author && <p className="mt-1 font-medium">av {book.author}</p>}
                     <p className="mt-2">{book.description}</p>
                     {/* Bruker datoen til å hente riktig posisjon fra månedslista */}
                     <p className="mt-4 text-sm text-gray-500">
@@ -85,12 +98,16 @@ export default async function Manedens_Bok() {
                             
                     <div className="pt-10">
                         Vurderingen dere har gitt denne boka:        
-                        <DisplayStarRating value={reviews[0].rating} />
+                        {bookReviews[0] ? (
+                            <DisplayStarRating value={bookReviews[0].rating} />
+                        ) : (
+                            <p className="mt-2 text-gray-600">Ingen vurderinger ennå.</p>
+                        )}
                     </div>
                             
                     <div>
                         Spice-vurderingen dere har gitt denne boka:
-                        <DisplaySpiceRating value={reviews[0].spice} />
+                        {bookReviews[0] && <DisplaySpiceRating value={bookReviews[0].spice} />}
                     </div>
                 </div>
 
@@ -107,7 +124,7 @@ export default async function Manedens_Bok() {
             </p>
                     
             <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-                {reviews.map((review) => (
+                {bookReviews.map((review) => (
                     <div key={review.id} className="p-5 w-100">
                     <p className="text-sm text-gray-500">Skrevet av {review.made_by}</p>
                     <p className="min-h-30 w-full bg-white text-sm">{review.review}</p>
@@ -138,4 +155,3 @@ export default async function Manedens_Bok() {
     );
 
   }
-  
