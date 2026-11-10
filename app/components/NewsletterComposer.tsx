@@ -98,9 +98,9 @@ export default function NewsletterComposer() {
   }
 
   return (
-    <div className="grid gap-8 lg:grid-cols-2">
+    <div className="grid items-start gap-8 lg:grid-cols-2">
       {/* Newsletter content and design controls. */}
-      <form onSubmit={handleSubmit} className="space-y-5 rounded-2xl border border-[#331F2E]/10 bg-white p-6 shadow-sm sm:p-8">
+      <form onSubmit={handleSubmit} className="space-y-5 rounded-2xl border border-[#D0C1B5] bg-[#F7F1E9] p-6 shadow-[0_4px_16px_rgba(51,31,46,0.06)] sm:p-8">
         {/* Subject is the text shown in the recipient's inbox. */}
         <div>
           <label htmlFor="newsletter-subject" className="mb-2 block text-sm font-semibold">
@@ -113,7 +113,7 @@ export default function NewsletterComposer() {
             required
             maxLength={180}
             placeholder="For eksempel: Nytt fra bokklubben"
-            className="w-full rounded-lg border border-gray-300 px-4 py-3 outline-none focus:border-[#5b1b75] focus:ring-2 focus:ring-[#5b1b75]/20"
+            className="w-full rounded-lg border border-[#B8A8A0] bg-[#FFFCF7] px-4 py-3 text-[#331F2E] placeholder:text-[#75636F] outline-none focus:border-[#5b1b75] focus:ring-2 focus:ring-[#5b1b75]/20"
           />
         </div>
 
@@ -129,7 +129,7 @@ export default function NewsletterComposer() {
             required
             maxLength={180}
             placeholder="Hei, bokvenner!"
-            className="w-full rounded-lg border border-gray-300 px-4 py-3 outline-none focus:border-[#5b1b75] focus:ring-2 focus:ring-[#5b1b75]/20"
+            className="w-full rounded-lg border border-[#B8A8A0] bg-[#FFFCF7] px-4 py-3 text-[#331F2E] placeholder:text-[#75636F] outline-none focus:border-[#5b1b75] focus:ring-2 focus:ring-[#5b1b75]/20"
           />
         </div>
 
@@ -146,7 +146,7 @@ export default function NewsletterComposer() {
             maxLength={12000}
             rows={9}
             placeholder="Skriv nyhetsbrevet her. Linjeskift blir tatt vare på i e-posten."
-            className="w-full rounded-lg border border-gray-300 px-4 py-3 outline-none focus:border-[#5b1b75] focus:ring-2 focus:ring-[#5b1b75]/20"
+            className="w-full rounded-lg border border-[#B8A8A0] bg-[#FFFCF7] px-4 py-3 text-[#331F2E] placeholder:text-[#75636F] outline-none focus:border-[#5b1b75] focus:ring-2 focus:ring-[#5b1b75]/20"
           />
         </div>
 
@@ -159,7 +159,7 @@ export default function NewsletterComposer() {
             id="newsletter-accent"
             value={accentColor}
             onChange={(event) => setAccentColor(event.target.value)}
-            className="w-full rounded-lg border border-gray-300 bg-white px-4 py-3"
+            className="w-full rounded-lg border border-[#B8A8A0] bg-[#FFFCF7] px-4 py-3 text-[#331F2E]"
           >
             {ACCENT_COLORS.map((color) => (
               <option key={color.value} value={color.value}>{color.label}</option>
@@ -178,9 +178,9 @@ export default function NewsletterComposer() {
             type="file"
             accept="image/jpeg,image/png,image/webp"
             onChange={(event) => handleImageChange(event.target.files?.[0])}
-            className="block w-full rounded-lg border border-gray-300 p-3 text-sm"
+            className="block w-full rounded-lg border border-[#B8A8A0] bg-[#FFFCF7] p-3 text-sm text-[#331F2E]"
           />
-          <p className="mt-2 text-sm text-gray-500">JPG, PNG eller WebP. Maksimalt 5 MB.</p>
+          <p className="mt-2 text-sm text-[#5D4B57]">JPG, PNG eller WebP. Maksimalt 5 MB.</p>
           {image && (
             <button
               type="button"
@@ -195,30 +195,32 @@ export default function NewsletterComposer() {
           )}
         </div>
 
-        {error && <p role="alert" className="rounded-lg bg-red-50 p-3 text-sm text-red-700">{error}</p>}
-        {status && <p role="status" className="rounded-lg bg-green-50 p-3 text-sm text-green-800">{status}</p>}
+        {/* Keep feedback and the send action reachable while the editor scrolls. */}
+        <div className="sticky bottom-0 z-20 -mx-6 -mb-6 space-y-3 border-t border-[#D0C1B5] bg-[#F7F1E9]/95 px-6 pb-6 pt-4 shadow-[0_-8px_18px_rgba(51,31,46,0.06)] backdrop-blur sm:-mx-8 sm:-mb-8 sm:px-8 sm:pb-8">
+          {error && <p role="alert" className="rounded-lg bg-red-50 p-3 text-sm text-red-700">{error}</p>}
+          {status && <p role="status" className="rounded-lg bg-green-50 p-3 text-sm text-green-800">{status}</p>}
 
-        {/* The send button submits the finished design to the protected API route. */}
-        <button
-          type="submit"
-          disabled={sending}
-          className="rounded-lg bg-[#331F2E] px-5 py-3 font-semibold text-white transition hover:bg-[#5C3C54] disabled:cursor-wait disabled:opacity-60"
-        >
-          {sending ? "Sender til medlemmene..." : "Send nyhetsbrev"}
-        </button>
-        <p className="text-sm text-gray-500">
-          E-posten sendes til alle unike e-postadresser i medlemslisten.
-        </p>
+          <button
+            type="submit"
+            disabled={sending}
+            className="w-full rounded-lg bg-[#331F2E] px-5 py-3 font-semibold text-white transition hover:bg-[#5C3C54] disabled:cursor-wait disabled:opacity-60 sm:w-auto"
+          >
+            {sending ? "Sender til medlemmene..." : "Send nyhetsbrev"}
+          </button>
+          <p className="text-sm text-[#5D4B57]">
+            E-posten sendes til alle unike e-postadresser i medlemslisten.
+          </p>
+        </div>
       </form>
 
       {/* Live preview of the email layout. */}
-      <section aria-label="Forhåndsvisning av nyhetsbrev">
+      <section aria-label="Forhåndsvisning av nyhetsbrev" className="lg:sticky lg:top-6 lg:self-start">
         <h2 className="mb-3 font-display text-lg font-semibold text-[#331F2E]">Forhåndsvisning</h2>
-        <div className="overflow-hidden rounded-xl border border-gray-200 bg-[#f4f1f6] p-4 sm:p-8">
-          <div className="mx-auto max-w-xl overflow-hidden rounded-lg bg-white shadow-sm">
+        <div className="overflow-hidden rounded-xl border border-[#D0C1B5] bg-[#E9DFD6] p-4 shadow-[0_4px_16px_rgba(51,31,46,0.06)] sm:p-8">
+          <div className="mx-auto max-w-xl overflow-hidden rounded-lg border border-[#E0D6CE] bg-[#FFFCF7] shadow-[0_8px_24px_rgba(51,31,46,0.10)]">
             <div className="h-2" style={{ backgroundColor: accentColor }} />
             <div className="p-6 sm:p-8">
-              <p className="mb-5 text-xs font-semibold uppercase tracking-[0.18em] text-gray-500">
+              <p className="mb-5 text-xs font-semibold uppercase tracking-[0.18em] text-[#655360]">
                 Bokklubben Lesely
               </p>
               {imagePreview && (
@@ -228,16 +230,16 @@ export default function NewsletterComposer() {
                   className="mb-6 max-h-72 w-full rounded-lg object-cover"
                 />
               )}
-              <h3 className="text-2xl font-bold text-gray-900">
+              <h3 className="text-2xl font-bold text-[#331F2E]">
                 {heading || "Overskriften vises her"}
               </h3>
-              <p className="mt-2 text-sm text-gray-500">
+              <p className="mt-2 text-sm text-[#655360]">
                 Emne: {subject || "E-postemnet vises her"}
               </p>
-              <p className="mt-6 whitespace-pre-wrap break-words text-base leading-7 text-gray-700">
+              <p className="mt-6 whitespace-pre-wrap break-words text-base leading-7 text-[#4D3B48]">
                 {message || "Innholdet i nyhetsbrevet vises her mens du skriver."}
               </p>
-              <div className="mt-8 border-t border-gray-200 pt-5 text-sm text-gray-500">
+              <div className="mt-8 border-t border-[#D5C9C0] pt-5 text-sm text-[#655360]">
                 En hilsen fra bokklubben Lesely
               </div>
             </div>

@@ -5,7 +5,7 @@ import EventForm from "../EventForm";
 // Page wrapper for creating an event; the shared form handles the submission.
 export default function NewEventPage() {
   return (
-    <main className="min-h-full flex-1 bg-[#E7DCE8] px-6 py-10 text-[#331F2E] sm:py-14">
+    <main className="min-h-full flex-1 bg-[#E2D9D0] px-6 py-10 text-[#331F2E] sm:py-14">
       <div className="mx-auto max-w-3xl">
         {/* Navigation and heading for the create-event page. */}
         <div className="mb-8">

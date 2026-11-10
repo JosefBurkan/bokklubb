@@ -11,7 +11,7 @@ export default function EventList({ events }: EventListProps) {
     return (
       <>
         {/* Empty state shown when the database contains no events. */}
-        <p className="rounded-xl bg-white p-8 text-center text-gray-500">
+        <p className="rounded-xl border border-[#D0C1B5] bg-[#F7F1E9] p-8 text-center text-[#5D4B57] shadow-[0_4px_16px_rgba(51,31,46,0.06)]">
           Ingen eventer er opprettet ennå.
         </p>
       </>

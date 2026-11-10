@@ -70,7 +70,7 @@ export default function BookSearchToolbar({ search, sort }: BookSearchToolbarPro
             }
           }}
           placeholder="Søk på tittel eller beskrivelse"
-          className="min-w-0 flex-1 basis-64 rounded-xl border border-[#331F2E]/20 bg-white px-4 py-3 text-[#331F2E] outline-none focus:border-[#A9533D] focus:ring-2 focus:ring-[#A9533D]/15"
+          className="min-w-0 flex-1 basis-64 rounded-xl border border-[#B8A8A0] bg-[#FFFCF7] px-4 py-3 text-[#331F2E] placeholder:text-[#75636F] outline-none focus:border-[#A9533D] focus:ring-2 focus:ring-[#A9533D]/20"
         />
         {/* Screen-reader label; the visible label is the select's option text. */}
         <label htmlFor="book-sort" className="sr-only">
@@ -82,7 +82,7 @@ export default function BookSearchToolbar({ search, sort }: BookSearchToolbarPro
           onChange={(event) =>
             handleSortChange(event.target.value as "name" | "created_at")
           }
-          className="rounded-xl border border-[#331F2E]/20 bg-white px-3 py-3 text-[#331F2E] outline-none focus:border-[#A9533D] focus:ring-2 focus:ring-[#A9533D]/15"
+          className="rounded-xl border border-[#B8A8A0] bg-[#FFFCF7] px-3 py-3 text-[#331F2E] outline-none focus:border-[#A9533D] focus:ring-2 focus:ring-[#A9533D]/20"
         >
           <option value="created_at">Dato registrert (nyeste først)</option>
           <option value="name">Tittel (A–Å)</option>
@@ -91,7 +91,7 @@ export default function BookSearchToolbar({ search, sort }: BookSearchToolbarPro
         {search && (
           <Link
             href="/admin/books"
-            className="inline-flex items-center rounded-xl border border-[#331F2E]/20 bg-white px-4 py-3 font-semibold text-[#331F2E] hover:bg-[#F6E5DD]"
+            className="inline-flex items-center rounded-xl border border-[#B8A8A0] bg-[#FFFCF7] px-4 py-3 font-semibold text-[#331F2E] hover:bg-[#F0E7DE]"
           >
             Nullstill
           </Link>

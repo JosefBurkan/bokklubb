@@ -57,8 +57,8 @@ export default async function EditBookPage({
     console.error("Could not fetch book:", bookError.message);
 
     return (
-      <main className="min-h-full flex-1 bg-[#E7DCE8] px-6 py-10 text-[#331F2E] sm:py-14">
-        <div className="mx-auto max-w-3xl rounded-2xl border border-[#331F2E]/10 bg-white p-6 shadow-sm">
+      <main className="min-h-full flex-1 bg-[#E2D9D0] px-6 py-10 text-[#331F2E] sm:py-14">
+        <div className="mx-auto max-w-3xl rounded-2xl border border-[#D0C1B5] bg-[#F7F1E9] p-6 shadow-[0_4px_16px_rgba(51,31,46,0.06)]">
           {/* Explain the load failure and offer a way back to the book list. */}
           <h1 className="font-display text-2xl font-semibold text-[#331F2E]">
             Kunne ikke hente boka
@@ -238,7 +238,7 @@ export default async function EditBookPage({
   }
 
   return (
-    <main className="min-h-full flex-1 bg-[#E7DCE8] px-6 py-10 text-[#331F2E] sm:py-14">
+    <main className="min-h-full flex-1 bg-[#E2D9D0] px-6 py-10 text-[#331F2E] sm:py-14">
       <div className="mx-auto max-w-3xl">
 
         {/* Back link and title for the edit page. */}
@@ -263,7 +263,7 @@ export default async function EditBookPage({
         {/* Server Action submits the edited fields and optional replacement cover. */}
         <form
   action={updateBook}
-  className="rounded-2xl border border-[#331F2E]/10 bg-white p-6 shadow-sm sm:p-8"
+  className="rounded-2xl border border-[#D0C1B5] bg-[#F7F1E9] p-6 shadow-[0_4px_16px_rgba(51,31,46,0.06)] sm:p-8"
 >
           {/* Book title field. */}
           <div className="mb-6">
@@ -286,13 +286,15 @@ export default async function EditBookPage({
                 w-full
                 rounded-lg
                 border
-                border-gray-300
+                border-[#B8A8A0]
+                bg-[#FFFCF7]
                 px-4
-                text-gray-900
+                text-[#331F2E]
                 outline-none
-                focus:border-orange-500
+                placeholder:text-[#75636F]
+                focus:border-[#A9533D]
                 focus:ring-2
-                focus:ring-orange-200
+                focus:ring-[#A9533D]/20
               "
             />
           </div>
@@ -317,14 +319,16 @@ export default async function EditBookPage({
                 w-full
                 rounded-lg
                 border
-                border-gray-300
+                border-[#B8A8A0]
+                bg-[#FFFCF7]
                 px-4
                 py-3
-                text-gray-900
+                text-[#331F2E]
                 outline-none
-                focus:border-orange-500
+                placeholder:text-[#75636F]
+                focus:border-[#A9533D]
                 focus:ring-2
-                focus:ring-orange-200
+                focus:ring-[#A9533D]/20
               "
             />
           </div>
@@ -342,7 +346,7 @@ export default async function EditBookPage({
                 className="mb-4 max-h-64 w-40 rounded-lg object-contain"
               />
             ) : (
-              <p className="mb-4 text-sm text-gray-500">
+              <p className="mb-4 text-sm text-[#5D4B57]">
                 Ingen omslagsbilde er registrert.
               </p>
             )}
@@ -364,14 +368,15 @@ export default async function EditBookPage({
                 w-full
                 rounded-lg
                 border
-                border-gray-300
+                border-[#B8A8A0]
+                bg-[#FFFCF7]
                 p-3
                 text-sm
-                text-gray-900
+                text-[#331F2E]
               "
             />
 
-            <p className="mt-2 text-sm text-gray-500">
+            <p className="mt-2 text-sm text-[#5D4B57]">
               JPG, PNG eller WebP. Maksimalt 5 MB.
               La feltet stå tomt for å beholde bildet.
             </p>
@@ -384,14 +389,14 @@ export default async function EditBookPage({
               className="
                 rounded-lg
                 border
-                border-gray-300
-                bg-white
+                border-[#B8A8A0]
+                bg-[#FFFCF7]
                 px-5
                 py-3
                 font-semibold
                 font-semibold
                 text-[#331F2E]
-                hover:bg-[#FCF3E5]
+                hover:bg-[#F0E7DE]
               "
             >
               Avbryt

@@ -97,10 +97,16 @@ export async function POST(request: Request) {
     );
   }
 
-  await sendDiscordEvent(
-    `En ny event er opprettet!`,
-    `${body.description}`
-  );
+  // The event is already saved, so a Discord outage or missing configuration
+  // should not make the client think creation failed and submit it twice.
+  try {
+    await sendDiscordEvent(
+      "En ny event er opprettet!",
+      body.description,
+    );
+  } catch (notificationError) {
+    console.warn("Event saved, but the Discord notification was not sent:", notificationError);
+  }
 
   return Response.json(data, { status: 201 });
 }

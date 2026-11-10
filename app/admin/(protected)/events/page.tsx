@@ -26,7 +26,7 @@ export default async function AdminEventsPage() {
   }
 
   return (
-    <main className="min-h-full flex-1 bg-[#E7DCE8] px-6 py-10 text-[#331F2E] sm:py-14">
+    <main className="min-h-full flex-1 bg-[#E2D9D0] px-6 py-10 text-[#331F2E] sm:py-14">
       <div className="mx-auto max-w-6xl">
 
         {/* Shared navigation link back to the admin dashboard. */}

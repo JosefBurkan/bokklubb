@@ -3,6 +3,8 @@ import Link from "next/link";
 import BookStatusButton from "./BookStatusButton";
 import BookSearchToolbar from "./BookSearchToolbar";
 import DeleteBookButton from "./DeleteBookButton";
+import BookCollectionCard from "./BookCollectionCard";
+import MonthlyBookCard from "./MonthlyBookCard";
 
 type Book = {
   id: number;
@@ -62,40 +64,12 @@ export default function BookSearch({
         <h2 className="mb-4 font-display text-xl font-semibold text-[#331F2E]">Månedens bok</h2>
 
         {currentBook ? (
-          <div className="flex flex-col gap-5 rounded-2xl bg-white p-6 sm:flex-row">
-            {currentBook.cloudinaryPath && (
-              <img
-                src={currentBook.cloudinaryPath}
-                alt={currentBook.name}
-                className="w-40 rounded-lg object-cover"
-              />
-            )}
-            <div>
-              <h3 className="text-lg font-bold">{currentBook.name}</h3>
-              <p className="mt-2 text-gray-600">{currentBook.description}</p>
-              <p className="mt-3 text-sm text-gray-500">
-                Registrert i {getMonth(currentBook.created_at, months)}
-              </p>
-              <p className="mt-2 text-sm font-semibold text-green-700">
-                Aktiv bok
-              </p>
-              <div className="mt-4 flex flex-wrap gap-2">
-                <Link
-                  href={`/admin/books/${currentBook.id}/edit`}
-                  className="inline-flex items-center rounded-lg border border-gray-300 px-4 py-2 font-semibold hover:bg-gray-50"
-                >
-                  Rediger bok
-                </Link>
-                <BookStatusButton bookId={currentBook.id} active />
-                <DeleteBookButton
-                  bookId={currentBook.id}
-                  bookName={currentBook.name}
-                />
-              </div>
-            </div>
-          </div>
+          <MonthlyBookCard
+            book={currentBook}
+            registeredMonth={getMonth(currentBook.created_at, months)}
+          />
         ) : (
-          <p className="rounded-2xl border border-[#331F2E]/10 bg-white p-6 text-[#5C3C54] shadow-sm">Ingen aktiv bok er valgt.</p>
+          <p className="rounded-2xl border border-[#D0C1B5] bg-[#F7F1E9] p-6 text-[#594653] shadow-[0_4px_16px_rgba(51,31,46,0.06)]">Ingen aktiv bok er valgt.</p>
         )}
       </section>
 
@@ -108,29 +82,41 @@ export default function BookSearch({
           <div>
             <h2 className="font-display text-xl font-semibold text-[#331F2E]">Bøker i samlingen</h2>
             {search && (
-              <p className="mt-1 text-sm text-[#6A5A65]">
+              <p className="mt-1 text-sm text-[#594653]">
                 Søker etter «{search}»
               </p>
             )}
           </div>
-          <p className="text-sm text-[#6A5A65]" aria-live="polite">
+          <p className="text-sm text-[#594653]" aria-live="polite">
             {firstResult}–{lastResult} av {totalCount} bøker
           </p>
         </div>
 
         {books.length === 0 ? (
           /* Show a search-specific message or the empty collection message. */
-          <p className="rounded-2xl bg-white p-6" role="status">
+          <p className="rounded-2xl border border-[#D0C1B5] bg-[#F7F1E9] p-6 text-[#594653]" role="status">
             {search
               ? `Ingen bøker samsvarer med «${search}».`
               : "Det finnes ingen bøker ennå."}
           </p>
         ) : (
-          /* Each table row shows one book and its available admin actions. */
-          <div className="overflow-x-auto rounded-2xl bg-white shadow-sm">
-            <table className="w-full min-w-[680px] border-collapse text-left">
+          <>
+            {/* Stacked records keep every book and action readable on mobile and tablet. */}
+            <div className="space-y-3 lg:hidden">
+              {books.map((book) => (
+                <BookCollectionCard
+                  key={book.id}
+                  book={book}
+                  registeredMonth={getMonth(book.created_at, months)}
+                />
+              ))}
+            </div>
+
+            {/* The desktop table is retained when the layout has room for its columns. */}
+            <div className="hidden overflow-x-auto rounded-2xl border border-[#D0C1B5] bg-[#F7F1E9] shadow-[0_4px_16px_rgba(51,31,46,0.06)] lg:block">
+              <table className="w-full min-w-[680px] border-collapse text-left">
               <thead>
-                <tr className="border-b border-gray-200 text-sm text-gray-600">
+                <tr className="border-b border-[#D0C1B5] text-sm text-[#594653]">
                   <th scope="col" className="px-5 py-4 font-semibold">Bok</th>
                   <th scope="col" className="px-5 py-4 font-semibold">Registrert</th>
                   <th scope="col" className="px-5 py-4 font-semibold">Status</th>
@@ -139,7 +125,7 @@ export default function BookSearch({
               </thead>
               <tbody>
                 {books.map((book) => (
-                  <tr key={book.id} className="border-b border-gray-100 last:border-0">
+                  <tr key={book.id} className="border-b border-[#E1D6CC] last:border-0">
                     <td className="px-5 py-4">
                       <div className="flex min-w-64 items-center gap-3">
                         {book.cloudinaryPath ? (
@@ -149,17 +135,17 @@ export default function BookSearch({
                             className="h-14 w-10 shrink-0 rounded object-cover"
                           />
                         ) : (
-                          <div className="h-14 w-10 shrink-0 rounded bg-gray-100" />
+                          <div className="h-14 w-10 shrink-0 rounded bg-[#E4D9CF]" />
                         )}
                         <div>
-                          <p className="font-semibold text-gray-900">{book.name}</p>
-                          <p className="mt-1 line-clamp-2 max-w-xl text-sm text-gray-600">
+                          <p className="font-semibold text-[#331F2E]">{book.name}</p>
+                          <p className="mt-1 line-clamp-2 max-w-xl text-sm text-[#594653]">
                             {book.description}
                           </p>
                         </div>
                       </div>
                     </td>
-                    <td className="whitespace-nowrap px-5 py-4 text-sm text-gray-600">
+                    <td className="whitespace-nowrap px-5 py-4 text-sm text-[#594653]">
                       {getMonth(book.created_at, months)}
                     </td>
                     <td className="px-5 py-4">
@@ -168,14 +154,14 @@ export default function BookSearch({
                           Månedens bok
                         </span>
                       ) : (
-                        <span className="text-sm text-gray-500">Arkivert</span>
+                        <span className="text-sm text-[#655360]">Arkivert</span>
                       )}
                     </td>
                     <td className="px-5 py-4">
                       <div className="flex flex-wrap gap-2">
                         <Link
                           href={`/admin/books/${book.id}/edit`}
-                          className="inline-flex items-center rounded-lg border border-gray-300 px-3 py-2 text-sm font-semibold hover:bg-gray-50"
+                          className="inline-flex items-center rounded-lg border border-[#B8A8A0] bg-[#FFFCF7] px-3 py-2 text-sm font-semibold text-[#331F2E] hover:bg-[#F0E7DE]"
                         >
                           Rediger bok
                         </Link>
@@ -193,8 +179,9 @@ export default function BookSearch({
                   </tr>
                 ))}
               </tbody>
-            </table>
-          </div>
+              </table>
+            </div>
+          </>
         )}
 
         {totalPages > 1 && (
@@ -206,7 +193,7 @@ export default function BookSearch({
             {page > 1 ? (
               <Link
                 href={pageHref(search, sort, page - 1)}
-                className="rounded-lg bg-white px-4 py-2 font-semibold text-[#340949] hover:bg-gray-100"
+                className="rounded-lg border border-[#B8A8A0] bg-[#FFFCF7] px-4 py-2 font-semibold text-[#331F2E] hover:bg-[#F0E7DE]"
               >
                 ← Forrige
               </Link>
@@ -219,7 +206,7 @@ export default function BookSearch({
             {page < totalPages ? (
               <Link
                 href={pageHref(search, sort, page + 1)}
-                className="rounded-lg bg-white px-4 py-2 font-semibold text-[#340949] hover:bg-gray-100"
+                className="rounded-lg border border-[#B8A8A0] bg-[#FFFCF7] px-4 py-2 font-semibold text-[#331F2E] hover:bg-[#F0E7DE]"
               >
                 Neste →
               </Link>

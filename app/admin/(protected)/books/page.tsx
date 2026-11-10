@@ -81,8 +81,8 @@ export default async function AdminBooksPage({
     );
 
     return (
-      <main className="min-h-full flex-1 bg-[#E7DCE8] px-6 py-10 text-[#331F2E] sm:py-14">
-        <div className="mx-auto max-w-6xl rounded-2xl bg-white p-6">
+      <main className="min-h-full flex-1 bg-[#E2D9D0] px-6 py-10 text-[#331F2E] sm:py-14">
+        <div className="mx-auto max-w-6xl rounded-2xl border border-[#D0C1B5] bg-[#F7F1E9] p-6 shadow-[0_4px_16px_rgba(51,31,46,0.06)]">
           <h1 className="text-2xl font-bold">
             Administrer månedens bok
           </h1>
@@ -108,7 +108,7 @@ export default async function AdminBooksPage({
   }
 
   return (
-    <main className="min-h-full flex-1 bg-[#E7DCE8] px-6 py-10 text-[#331F2E] sm:py-14">
+    <main className="min-h-full flex-1 bg-[#E2D9D0] px-6 py-10 text-[#331F2E] sm:py-14">
       <div className="mx-auto max-w-6xl">
         {/* Shared navigation link back to the admin dashboard. */}
         <AdminBackLink />

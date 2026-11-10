@@ -25,9 +25,9 @@ export default async function ProtectedAdminLayout({
   }
 
   return (
-    <div className="flex min-h-full flex-1 flex-col bg-[#E7DCE8]">
+    <div className="flex min-h-screen flex-1 flex-col bg-[#E2D9D0] md:flex-row">
       <AdminNavigation />
-      <div className="flex flex-1 flex-col">{children}</div>
+      <div className="flex min-w-0 flex-1 flex-col">{children}</div>
     </div>
   );
 }

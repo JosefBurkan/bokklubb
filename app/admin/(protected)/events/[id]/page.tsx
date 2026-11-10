@@ -53,7 +53,7 @@ export default async function EventDetailsPage({ params }: EventDetailsPageProps
     : event.listOfParticipants ?? [];
 
   return (
-    <main className="min-h-full flex-1 bg-[#E7DCE8] px-6 py-10 text-[#331F2E] sm:py-14">
+    <main className="min-h-full flex-1 bg-[#E2D9D0] px-6 py-10 text-[#331F2E] sm:py-14">
       <div className="mx-auto max-w-4xl">
         {/* Return to the event collection. */}
         <Link
@@ -81,7 +81,7 @@ export default async function EventDetailsPage({ params }: EventDetailsPageProps
             <h2 className="font-display text-xl font-semibold text-[#331F2E]">Påmeldte deltakere</h2>
             <Link
               href={`/admin/events/${event.id}/edit`}
-              className="rounded-lg border border-[#331F2E]/20 bg-white px-4 py-2 font-semibold text-[#331F2E] hover:bg-[#F6E5DD]"
+              className="rounded-lg border border-[#B8A8A0] bg-[#FFFCF7] px-4 py-2 font-semibold text-[#331F2E] hover:bg-[#F0E7DE]"
             >
               Rediger event
             </Link>

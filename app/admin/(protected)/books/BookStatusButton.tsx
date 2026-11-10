@@ -47,10 +47,10 @@ export default function BookStatusButton({
       type="button"
       onClick={updateStatus}
       disabled={loading}
-      className={`inline-flex items-center rounded-lg px-3 py-2 text-sm font-semibold text-white disabled:cursor-wait disabled:opacity-50 ${
+      className={`inline-flex items-center rounded-lg border px-3 py-2 text-sm font-semibold disabled:cursor-wait disabled:opacity-50 ${
         active
-          ? "bg-red-700 hover:bg-red-800"
-          : "bg-[#340949] hover:bg-[#4a1765]"
+          ? "border-[#B8A8A0] bg-[#FFFCF7] text-[#594653] hover:bg-[#F0E7DE]"
+          : "border-[#331F2E] bg-[#331F2E] text-white hover:bg-[#5C3C54]"
       }`}
     >
       {loading
