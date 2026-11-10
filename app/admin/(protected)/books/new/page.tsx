@@ -9,6 +9,7 @@ import Link from "next/link";
 export default function BookForm() {
   const router = useRouter();
   const [name, setName] = useState("");
+  const [author, setAuthor] = useState("");
   const [description, setDescription] = useState("");
   const [image, setImage] = useState<File | null>(null);
   const [error, setError] = useState("");
@@ -28,6 +29,7 @@ export default function BookForm() {
     // FormData is used because the request includes an image file upload.
     const formData = new FormData();
     formData.append("name", name);
+    formData.append("author", author);
     formData.append("description", description);
     formData.append("image", image);
 
@@ -92,6 +94,21 @@ export default function BookForm() {
               maxLength={200}
               className="w-full rounded-lg border border-[#B8A8A0] bg-[#FFFCF7] px-4 py-3 text-[#331F2E] placeholder:text-[#75636F] outline-none focus:border-[#A9533D] focus:ring-2 focus:ring-[#A9533D]/20"
               placeholder="Skriv inn boktittelen"
+            />
+          </div>
+
+          <div>
+            <label htmlFor="author" className="mb-2 block font-semibold">
+              Forfatter <span className="font-normal text-[#5D4B57]">(valgfritt)</span>
+            </label>
+            <input
+              id="author"
+              name="author"
+              value={author}
+              onChange={(event) => setAuthor(event.target.value)}
+              maxLength={200}
+              className="w-full rounded-lg border border-[#B8A8A0] bg-[#FFFCF7] px-4 py-3 text-[#331F2E] placeholder:text-[#75636F] outline-none focus:border-[#A9533D] focus:ring-2 focus:ring-[#A9533D]/20"
+              placeholder="Skriv inn forfatterens navn"
             />
           </div>
 

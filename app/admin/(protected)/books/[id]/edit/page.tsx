@@ -49,7 +49,7 @@ export default async function EditBookPage({
   // Fetch the book being edited.
   const { data: book, error: bookError } = await supabase
     .from("Books")
-    .select("id, name, description, cloudinaryPath, active")
+    .select("id, name, author, description, cloudinaryPath, active")
     .eq("id", id)
     .maybeSingle();
 
@@ -103,6 +103,7 @@ export default async function EditBookPage({
     }
 
     const name = String(formData.get("name") ?? "").trim();
+    const author = String(formData.get("author") ?? "").trim();
     const description = String(
       formData.get("description") ?? "",
     ).trim();
@@ -111,6 +112,10 @@ export default async function EditBookPage({
 
     if (!name || name.length > 200) {
       throw new Error("Boktittelen må være mellom 1 og 200 tegn.");
+    }
+
+    if (author.length > 200) {
+      throw new Error("Forfatternavnet kan ikke være lengre enn 200 tegn.");
     }
 
     if (!description || description.length > 10000) {
@@ -138,10 +143,12 @@ export default async function EditBookPage({
 
     const updates: {
       name: string;
+      author: string | null;
       description: string;
       cloudinaryPath?: string;
     } = {
       name,
+      author: author || null,
       description,
     };
 
@@ -296,6 +303,22 @@ export default async function EditBookPage({
                 focus:ring-2
                 focus:ring-[#A9533D]/20
               "
+            />
+          </div>
+
+          {/* Author is optional because older books may not have this information. */}
+          <div className="mb-6">
+            <label htmlFor="author" className="mb-2 block text-sm font-semibold">
+              Forfatter <span className="font-normal text-[#5D4B57]">(valgfritt)</span>
+            </label>
+            <input
+              id="author"
+              name="author"
+              type="text"
+              defaultValue={book.author ?? ""}
+              maxLength={200}
+              placeholder="Skriv inn forfatterens navn"
+              className="h-11 w-full rounded-lg border border-[#B8A8A0] bg-[#FFFCF7] px-4 text-[#331F2E] outline-none placeholder:text-[#75636F] focus:border-[#A9533D] focus:ring-2 focus:ring-[#A9533D]/20"
             />
           </div>
 

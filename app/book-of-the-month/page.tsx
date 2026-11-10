@@ -89,6 +89,7 @@ export default async function Manedens_Bok() {
             <div key={book.id} className="flex w-full  items-start justify-between p-5">
                 <div className="text-left">
                     <h2 className="text-2xl font-bold">{book.name}</h2>
+                    {book.author && <p className="mt-1 font-medium">av {book.author}</p>}
                     <p className="mt-2">{book.description}</p>
                     {/* Bruker datoen til å hente riktig posisjon fra månedslista */}
                     <p className="mt-4 text-sm text-gray-500">

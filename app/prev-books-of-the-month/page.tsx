@@ -62,6 +62,7 @@ export default async function prevBooksOfTheMonth() {
 
                     <div className="flex min-w-0 flex-col gap-3 ml-5">
                         <h3 className="text-xl font-bold">{book.name}</h3>
+                        {book.author && <p>av {book.author}</p>}
                         <p>{book.description}</p>
                         {/* Bruker datoen til å hente riktig posisjon fra månedslista */}
                         <p className="text-sm text-gray-500">
@@ -102,4 +103,3 @@ export default async function prevBooksOfTheMonth() {
     );
     
 }
-  

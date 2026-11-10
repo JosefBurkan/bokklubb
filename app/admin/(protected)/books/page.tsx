@@ -62,7 +62,7 @@ export default async function AdminBooksPage({
 
   if (search) {
     booksQuery = booksQuery.or(
-      `name.ilike.%${search}%,description.ilike.%${search}%`,
+      `name.ilike.%${search}%,author.ilike.%${search}%,description.ilike.%${search}%`,
     );
   }
 

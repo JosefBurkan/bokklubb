@@ -6,6 +6,7 @@ import DeleteBookButton from "./DeleteBookButton";
 type MonthlyBook = {
   id: number;
   name: string;
+  author: string | null;
   description: string;
   cloudinaryPath: string | null;
   created_at: string;
@@ -35,6 +36,7 @@ export default function MonthlyBookCard({ book, registeredMonth }: MonthlyBookCa
           Månedens bok
         </span>
         <h3 className="mt-3 font-display text-2xl font-semibold text-[#331F2E]">{book.name}</h3>
+        {book.author && <p className="mt-1 font-medium text-[#5D4B57]">av {book.author}</p>}
         <p className="mt-2 max-w-2xl leading-6 text-[#594653]">{book.description}</p>
         <p className="mt-3 text-sm text-[#5D4B57]">Registrert i {registeredMonth}</p>
 

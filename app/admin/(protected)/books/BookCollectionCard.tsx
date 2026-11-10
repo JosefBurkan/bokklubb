@@ -6,6 +6,7 @@ import DeleteBookButton from "./DeleteBookButton";
 type CollectionBook = {
   id: number;
   name: string;
+  author: string | null;
   description: string;
   cloudinaryPath: string | null;
   active: boolean;
@@ -29,6 +30,7 @@ export default function BookCollectionCard({ book, registeredMonth }: BookCollec
         )}
         <div className="min-w-0 flex-1">
           <h3 className="font-semibold text-[#331F2E]">{book.name}</h3>
+          {book.author && <p className="mt-0.5 text-sm text-[#5D4B57]">av {book.author}</p>}
           <p className="mt-1 line-clamp-3 text-sm leading-5 text-[#594653]">{book.description}</p>
           <div className="mt-2 flex flex-wrap items-center gap-2 text-xs text-[#5D4B57]">
             <span>Registrert i {registeredMonth}</span>

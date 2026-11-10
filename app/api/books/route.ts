@@ -70,6 +70,7 @@ export async function POST(request: Request) {
   }
 
   const name = formData.get("name");
+  const author = formData.get("author");
   const description = formData.get("description");
   const image = formData.get("image");
 
@@ -91,6 +92,13 @@ export async function POST(request: Request) {
   ) {
     return NextResponse.json(
       { error: "Oppgi en beskrivelse på maks 10 000 tegn." },
+      { status: 400 },
+    );
+  }
+
+  if (author !== null && (typeof author !== "string" || author.trim().length > 200)) {
+    return NextResponse.json(
+      { error: "Forfatternavnet kan ikke være lengre enn 200 tegn." },
       { status: 400 },
     );
   }
@@ -131,6 +139,7 @@ export async function POST(request: Request) {
       .from("Books")
       .insert({
         name: name.trim(),
+        author: typeof author === "string" && author.trim() ? author.trim() : null,
         description: description.trim(),
         cloudinaryPath: uploaded.secure_url,
         active: false,

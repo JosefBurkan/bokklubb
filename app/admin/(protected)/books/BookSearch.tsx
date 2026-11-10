@@ -9,6 +9,7 @@ import MonthlyBookCard from "./MonthlyBookCard";
 type Book = {
   id: number;
   name: string;
+  author: string | null;
   description: string;
   cloudinaryPath: string | null;
   active: boolean;
@@ -139,6 +140,7 @@ export default function BookSearch({
                         )}
                         <div>
                           <p className="font-semibold text-[#331F2E]">{book.name}</p>
+                          {book.author && <p className="mt-0.5 text-sm text-[#5D4B57]">av {book.author}</p>}
                           <p className="mt-1 line-clamp-2 max-w-xl text-sm text-[#594653]">
                             {book.description}
                           </p>
