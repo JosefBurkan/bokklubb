@@ -74,13 +74,15 @@ export async function PATCH(
 
   if (
     !body.date ||
+    typeof body.title !== "string" ||
+    !body.title.trim() ||
     !body.description ||
     !body.category
   ) {
     return Response.json(
       {
         error:
-          "Dato, beskrivelse og kategori er påkrevd",
+          "Dato, tittel, beskrivelse og kategori er påkrevd",
       },
       { status: 400 }
     );
@@ -97,6 +99,7 @@ export async function PATCH(
     .from("eventer")
     .update({
       date: body.date,
+      title: body.title.trim(),
       description: body.description,
       category: body.category,
     })

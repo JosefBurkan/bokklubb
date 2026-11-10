@@ -6,7 +6,7 @@ import { createClient } from "@/supabase/server";
 import AdminBackLink from "../AdminBackLink";
 import BookSearch from "./BookSearch";
 
-const PAGE_SIZE = 25;
+const PAGE_SIZE = 10;
 
 type AdminBooksPageProps = {
   searchParams: Promise<{

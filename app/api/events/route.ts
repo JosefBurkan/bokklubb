@@ -59,13 +59,15 @@ export async function POST(request: Request) {
   // Validate required fields.
   if (
     !body.date ||
+    typeof body.title !== "string" ||
+    !body.title.trim() ||
     !body.description ||
     !body.category
   ) {
     return Response.json(
       {
         error:
-          "Dato, beskrivelse og kategori er påkrevd",
+          "Dato, tittel, beskrivelse og kategori er påkrevd",
       },
       { status: 400 }
     );
@@ -83,6 +85,7 @@ export async function POST(request: Request) {
     .from("eventer")
     .insert({
       date: body.date,
+      title: body.title.trim(),
       description: body.description,
       category: body.category,
       listOfParticipants: [],
@@ -101,7 +104,7 @@ export async function POST(request: Request) {
   // should not make the client think creation failed and submit it twice.
   try {
     await sendDiscordEvent(
-      "En ny event er opprettet!",
+      body.title.trim(),
       body.description,
     );
   } catch (notificationError) {

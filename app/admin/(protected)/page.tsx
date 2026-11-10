@@ -64,7 +64,7 @@ export default async function AdminPage() {
       .select("id", { count: "exact", head: true }),
     supabase
       .from("eventer")
-      .select("id, date, description, category, listOfParticipants", { count: "exact" })
+      .select("id, date, title, description, category, listOfParticipants", { count: "exact" })
       .gte("date", nowLocal)
       .order("date", { ascending: true })
       .limit(1),
@@ -271,8 +271,11 @@ export default async function AdminPage() {
                     {nextEvent.category}
                   </span>
                   <h3 className="mt-3 font-display text-lg font-semibold leading-snug sm:text-xl">
-                    {nextEvent.description}
+                    {nextEvent.title?.trim() || nextEvent.description}
                   </h3>
+                  {nextEvent.title?.trim() && nextEvent.description && nextEvent.title !== nextEvent.description && (
+                    <p className="mt-1 text-xs text-[#E4D5E0] sm:text-sm">{nextEvent.description}</p>
+                  )}
                   <p className="mt-2 text-xs text-[#E4D5E0] sm:text-sm">
                     {new Intl.DateTimeFormat("nb-NO", {
                       hour: "2-digit",

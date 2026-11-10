@@ -1,28 +1,49 @@
 import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
 import { createClient } from "@/supabase/server";
 
 import AdminBackLink from "../AdminBackLink";
 import EventList from "./EventList";
+import EventPagination from "./EventPagination";
 import Link from "next/link";
 
+const PAGE_SIZE = 5;
+
+type AdminEventsPageProps = {
+  searchParams: Promise<{ page?: string }>;
+};
+
 // Server page: loads events from Supabase, then passes them to the list UI.
-export default async function AdminEventsPage() {
+export default async function AdminEventsPage({ searchParams }: AdminEventsPageProps) {
+  const params = await searchParams;
+  const requestedPage = Number.parseInt(params.page ?? "1", 10);
+  const page = Number.isSafeInteger(requestedPage) && requestedPage > 0
+    ? Math.min(requestedPage, 1_000_000)
+    : 1;
+  const firstRow = (page - 1) * PAGE_SIZE;
   const cookieStore = await cookies();
 
   const supabase = createClient(cookieStore);
 
-  // Sort upcoming events first by their scheduled date.
-  const { data: events, error } = await supabase
+  // Fetch only the current page and count all rows for accurate pagination.
+  const { data: events, error, count } = await supabase
     .from("eventer")
-    .select("*")
-    .order("date", { ascending: true });
+    .select("*", { count: "exact" })
+    .order("date", { ascending: true })
+    .order("id", { ascending: true })
+    .range(firstRow, firstRow + PAGE_SIZE - 1);
 
   if (error) {
     console.error(
       "Error fetching events:",
       error
     );
+  }
+
+  const totalPages = Math.max(1, Math.ceil((count ?? 0) / PAGE_SIZE));
+  if (page > totalPages) {
+    redirect(totalPages === 1 ? "/admin/events" : `/admin/events?page=${totalPages}`);
   }
 
   return (
@@ -54,6 +75,11 @@ export default async function AdminEventsPage() {
           </h2>
 
           <EventList events={events ?? []} />
+          <EventPagination
+            page={page}
+            pageSize={PAGE_SIZE}
+            totalCount={count ?? 0}
+          />
         </section>
       </div>
     </main>

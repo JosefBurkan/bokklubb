@@ -31,7 +31,7 @@ export default async function EditEventPage({ params }: EditEventPageProps) {
   // Only fetch the fields needed by the edit form.
   const { data: event, error } = await supabase
     .from("eventer")
-    .select("id, date, description, category, listOfParticipants")
+    .select("id, date, title, description, category, listOfParticipants")
     .eq("id", id)
     .maybeSingle();
 
@@ -78,7 +78,7 @@ export default async function EditEventPage({ params }: EditEventPageProps) {
           </Link>
           <p className="text-sm font-semibold uppercase tracking-[0.16em] text-[#A9533D]">Bokklubbens kalender</p>
           <h1 className="mt-2 font-display text-3xl font-semibold text-[#331F2E] sm:text-4xl">Rediger arrangement</h1>
-          <p className="mt-2 text-[#5C3C54]">Endre tid, beskrivelse eller kategori.</p>
+          <p className="mt-2 text-[#5C3C54]">Endre tittel, tid, beskrivelse eller kategori.</p>
         </div>
         {/* Shared form prefilled with the event loaded above. */}
         <EventForm

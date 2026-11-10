@@ -21,7 +21,7 @@ export default async function EventDetailsPage({ params }: EventDetailsPageProps
   const supabase = createClient(cookieStore);
   const { data: event, error } = await supabase
     .from("eventer")
-    .select("id, date, description, category, listOfParticipants")
+    .select("id, date, title, description, category, listOfParticipants")
     .eq("id", id)
     .maybeSingle();
 
@@ -66,7 +66,10 @@ export default async function EventDetailsPage({ params }: EventDetailsPageProps
         {/* Event details and the number of names currently registered. */}
         <header className="mb-8 mt-6">
           <p className="text-sm font-semibold uppercase tracking-[0.16em] text-[#A9533D]">Arrangementsdetaljer</p>
-          <h1 className="mt-2 font-display text-3xl font-semibold text-[#331F2E] sm:text-4xl">{event.description}</h1>
+          <h1 className="mt-2 font-display text-3xl font-semibold text-[#331F2E] sm:text-4xl">{event.title?.trim() || event.description}</h1>
+          {event.title?.trim() && event.description && event.title !== event.description && (
+            <p className="mt-2 text-[#5C3C54]">{event.description}</p>
+          )}
           <p className="mt-2 text-[#5C3C54]">
             {new Date(event.date).toLocaleString("no-NO")} · {event.category}
           </p>

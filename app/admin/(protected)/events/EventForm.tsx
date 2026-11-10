@@ -172,6 +172,7 @@ export default function EventForm({
   const initialDate = getInitialDateParts(initialEvent?.date);
   const [date, setDate] = useState(initialDate.date);
   const [time, setTime] = useState(initialDate.time);
+  const [title, setTitle] = useState(initialEvent?.title ?? "");
   const [description, setDescription] = useState(initialEvent?.description ?? "");
   const [category, setCategory] = useState(initialEvent?.category ?? "Sosial");
   const [loading, setLoading] = useState(false);
@@ -180,6 +181,11 @@ export default function EventForm({
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setError("");
+
+    if (!title.trim()) {
+      setError("Skriv inn en tittel på arrangementet.");
+      return;
+    }
 
     const parsedDate = parseEventDate(date);
     if (!parsedDate) {
@@ -207,6 +213,7 @@ export default function EventForm({
           body: JSON.stringify({
             // Both create and edit store the Oslo wall time consistently.
             date: localDateTime,
+            title: title.trim(),
             description: description.trim(),
             category,
           }),
@@ -299,7 +306,24 @@ export default function EventForm({
         </div>
       </div>
 
-      {/* Text shown as the event's title/details. */}
+      {/* The short title is shown as the event heading throughout the site. */}
+      <div className="mb-6">
+        <label htmlFor="event-title" className="mb-2 block text-sm font-semibold">
+          Tittel
+        </label>
+        <input
+          id="event-title"
+          type="text"
+          value={title}
+          onChange={(event) => setTitle(event.target.value)}
+          required
+          maxLength={200}
+          placeholder="Skriv inn arrangementets tittel"
+          className="w-full rounded-lg border border-[#B8A8A0] bg-[#FFFCF7] px-4 py-3 text-[#331F2E] placeholder:text-[#75636F] outline-none focus:border-[#A9533D] focus:ring-2 focus:ring-[#A9533D]/20"
+        />
+      </div>
+
+      {/* Longer event information is stored separately from the title. */}
       <div className="mb-6">
         <label htmlFor="event-description" className="mb-2 block text-sm font-semibold">
           Beskrivelse
