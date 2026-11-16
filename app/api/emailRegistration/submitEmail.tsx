@@ -14,13 +14,15 @@ export default async function submitEmail(formData: FormData) {
   // Dette er for å sjekke om eposten allerede eksisterer 
   const cookieStore = await cookies();
   const supabase = await createClient(cookieStore)
-  
+
+  const { data: { user } } = await supabase.auth.getUser();
+
+  const userName = user?.user_metadata?.name
   
   const { data: emailExists, error } = await supabase
       .from("listOfMembers")
       .select("*")
       .eq("email", title)
-      .limit(1)
       .maybeSingle();
 
   if (error) {
@@ -30,16 +32,30 @@ export default async function submitEmail(formData: FormData) {
     );
   }
 
-  // Legg inn eposten kun om den ikke finnes
-  if (!emailExists)
+const { data: userExists, error: usr} = await supabase
+  .from("listOfMembers")
+  .select("*")
+  .eq("account_name", userName)
+  .maybeSingle();
+
+if (usr) {
+  console.error(
+    "Error fetching events:",
+    usr
+  );
+}
+
+// Legg inn eposten kun om den ikke finnes, og brukeren ikke har lagt inn en annen epost
+if (!emailExists && !userExists)
   {
     if (title && title.includes("@")) {
 
-      const { data } = await supabase
+      const { data, error: errEmail } = await supabase
         .from("listOfMembers")
-        .insert({ email: title });
+        .insert({ email: title, account_name: userName })
+        .select();
 
-      console.log({ data })
+      console.log({ data, errEmail })
 
       SendMail(title);
 
@@ -57,6 +73,6 @@ export default async function submitEmail(formData: FormData) {
   }
   else
   {
-      console.log("Brukeren eksisterer allerede")    
+      console.log("Brukeren eller eposten eksisterer allerede")    
   }
 }

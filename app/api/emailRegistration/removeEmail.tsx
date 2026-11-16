@@ -4,35 +4,37 @@ import { cookies } from "next/headers";
 import { redirect } from 'next/navigation'
 import { createClient } from "@/supabase/server";
 
-export default async function removeEmail(formData: FormData) {
-
-  const title = formData.get('email') as String
+export default async function removeEmail() {
 
   // Dette er for å sjekke om eposten allerede eksisterer 
   const cookieStore = await cookies();
   const supabase = await createClient(cookieStore)
-  
-  const { data: emailExists, error } = await supabase
-      .from("listOfMembers")
-      .select("*")
-      .eq("email", title)
-      .limit(1)
-      .maybeSingle();
 
-  if (error) {
+  const { data: { user } } = await supabase.auth.getUser();
+
+  const userName = user?.user_metadata?.name
+
+  // Fjern eposten knyttet til brukernavnet
+  const { data: userExists, error: usr} = await supabase
+    .from("listOfMembers")
+    .select("*")
+    .eq("account_name", userName)
+    .maybeSingle();
+
+  if (usr) {
     console.error(
       "Error fetching events:",
-      error
+      usr
     );
   }
-  
+
   // Legg inn eposten kun om den ikke finnes
-  if (emailExists)
+  if (userExists)
   {
     const { data } = await supabase
         .from("listOfMembers")
         .delete()
-        .eq("email", title);
+        .eq("account_name", userName);
 
     console.log({ data })
 
@@ -40,6 +42,6 @@ export default async function removeEmail(formData: FormData) {
   }
   else
   {
-      console.log(`Fant ingen registrert epost som heter ${title}`)    
+      console.log(`Fant ingen epost registrert på brukeren ${userName}`)    
   }
 }

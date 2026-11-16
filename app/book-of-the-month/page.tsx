@@ -11,9 +11,9 @@ export default async function Manedens_Bok() {
 
     // Brukes til å vise datoen igjennom "created_at"-tabellen fra databasen
     const months = ["Januar", "Februar", "Mars",
-                    "April", "Mai", "Juni",
-                    "Juli", "August", "September",
-                    "Oktober", "November", "Desember"]
+        "April", "Mai", "Juni",
+        "Juli", "August", "September",
+        "Oktober", "November", "Desember"]
     
     
     const { data: { user } } = await supabase.auth.getUser();
@@ -29,13 +29,13 @@ export default async function Manedens_Bok() {
         .from("Books")
         .select("*")
         .eq("active", true)
-        .maybeSingle();
+        .single();
   
     if (error) {
-      console.error(
-        "Error fetching monthly book:",
-        error
-      );
+        console.error(
+            "Error fetching monthly book:",
+            error
+        );
     }
 
     // The admin can remove the monthly book, so show a useful empty state instead of dereferencing null.
@@ -55,16 +55,25 @@ export default async function Manedens_Bok() {
         );
     }
 
-    const { data: reviews } = await supabase
-        .from("book_reviews")
-        .select("*")
-        .eq("book_id", book.id)
-        .limit(2);
-
-    const bookReviews = reviews ?? [];
+    const [{ data: bestReview }, { data: worstReview }] = await Promise.all([
+        supabase
+            .from("book_reviews")
+            .select("*")
+            .eq("book_id", book.id)
+            .order("rating", { ascending: false })
+            .limit(1)
+            .maybeSingle(),
+        supabase
+            .from("book_reviews")
+            .select("*")
+            .eq("book_id", book.id)
+            .order("rating", { ascending: true })
+            .limit(1)
+            .maybeSingle(),
+    ]);
+    
   
     console.log(book);
-    console.log(reviews);
 
     return (
 
@@ -98,8 +107,8 @@ export default async function Manedens_Bok() {
                             
                     <div className="pt-10">
                         Vurderingen dere har gitt denne boka:        
-                        {bookReviews[0] ? (
-                            <DisplayStarRating value={bookReviews[0].rating} />
+                        {bestReview ? (
+                            <DisplayStarRating value={bestReview.rating} />
                         ) : (
                             <p className="mt-2 text-gray-600">Ingen vurderinger ennå.</p>
                         )}
@@ -107,7 +116,7 @@ export default async function Manedens_Bok() {
                             
                     <div>
                         Spice-vurderingen dere har gitt denne boka:
-                        {bookReviews[0] && <DisplaySpiceRating value={bookReviews[0].spice} />}
+                        {bestReview && <DisplaySpiceRating value={bestReview.spice} />}
                     </div>
                 </div>
 
@@ -124,15 +133,21 @@ export default async function Manedens_Bok() {
             </p>
                     
             <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-                {bookReviews.map((review) => (
-                    <div key={review.id} className="p-5 w-100">
-                    <p className="text-sm text-gray-500">Skrevet av {review.made_by}</p>
-                    <p className="min-h-30 w-full bg-white text-sm">{review.review}</p>
+                    <div className="p-5 w-100">
+                        <p className="text-sm text-gray-500">Skrevet av {bestReview.made_by}</p>
+                        <p className="min-h-30 w-full bg-white text-sm">{bestReview.review}</p>
 
-                    <DisplayStarRating value={review.rating} />
-                    <DisplaySpiceRating value={review.spice} />
+                        <DisplayStarRating value={bestReview.rating} />
+                        <DisplaySpiceRating value={bestReview.spice} />
                     </div>
-                ))}
+                        
+                    <div className="p-5 w-100">
+                        <p className="text-sm text-gray-500">Skrevet av {worstReview.made_by}</p>
+                        <p className="min-h-30 w-full bg-white text-sm">{worstReview.review}</p>
+
+                        <DisplayStarRating value={worstReview.rating} />
+                        <DisplaySpiceRating value={worstReview.spice} />
+                    </div>
             </div>
                     
             <div className="grid grid-cols-1">
