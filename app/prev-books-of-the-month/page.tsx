@@ -83,7 +83,7 @@ export default async function prevBooksOfTheMonth() {
                                     📖 Community reviews
                                 </p>
 
-                                <Link href={`read-reviews/${book.id}`}
+                                <Link href={`book-reviews/${book.id}`}
                                     className="pt-10 text-gray-500 text-sm underline">
                                     Les alle reviews her →
                                 </Link>

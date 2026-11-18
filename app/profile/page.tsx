@@ -3,6 +3,7 @@ import { redirect } from "next/navigation";
 import { cookies } from "next/headers";
 import { createClient } from "@/supabase/server";
 import ProfileForm from "./ProfileForm";
+import Link from "@/node_modules/next/link";
 
 export default async function ProfilePage() {
   const cookieStore = await cookies();
@@ -61,13 +62,13 @@ export default async function ProfilePage() {
     <main className="min-h-screen bg-[var(--main)] px-4 py-8 sm:px-6 sm:py-12">
       <div className="mx-auto w-full max-w-3xl">
         <div className="mb-6 sm:mb-8">
-          <p className="text-sm font-semibold uppercase tracking-wider text-white/90 sm:text-base">
+          <p className="text-sm font-semibold uppercase tracking-wider sm:text-base">
             Bokklubben
           </p>
-          <h1 className="mt-2 text-3xl font-bold text-white sm:text-4xl">
+          <h1 className="mt-2 text-3xl font-bold sm:text-4xl">
             Min profil
           </h1>
-          <p className="mt-2 text-sm text-white/80 sm:text-base">
+          <p className="mt-2 text-sm sm:text-base">
             Administrer profilinformasjonen din.
           </p>
         </div>
@@ -106,10 +107,15 @@ export default async function ProfilePage() {
               initialDisplayName={displayName}
               initialBio={bio}
             />
+            <Link className="underline"
+              href={`user-reviews/${displayName}`}>
+              Se {displayName} sine vurderinger her →
+            </Link>
           </div>
         </section>
 
-        <p className="mt-4 text-center text-xs leading-relaxed text-white/80 sm:text-sm">
+
+        <p className="mt-4 text-center text-xs leading-relaxed sm:text-sm">
           Profilinformasjonen din er privat foreløpig. Du kan endre
           visningsnavn og beskrivelse uten å endre Discord-kontoen din.
         </p>

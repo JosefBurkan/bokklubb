@@ -32,21 +32,21 @@ export default async function submitEmail(formData: FormData) {
     );
   }
 
-const { data: userExists, error: usr} = await supabase
-  .from("listOfMembers")
-  .select("*")
-  .eq("account_name", userName)
-  .maybeSingle();
+  const { data: userExists, error: usr} = await supabase
+    .from("listOfMembers")
+    .select("*")
+    .eq("account_name", userName)
+    .maybeSingle();
 
-if (usr) {
-  console.error(
-    "Error fetching events:",
-    usr
-  );
-}
+  if (usr) {
+    console.error(
+      "Error fetching events:",
+      usr
+    );
+  }
 
-// Legg inn eposten kun om den ikke finnes, og brukeren ikke har lagt inn en annen epost
-if (!emailExists && !userExists)
+  // Legg inn eposten kun om den ikke finnes, og brukeren ikke har lagt inn en annen epost
+  if (!emailExists && !userExists)
   {
     if (title && title.includes("@")) {
 
@@ -73,6 +73,6 @@ if (!emailExists && !userExists)
   }
   else
   {
-      console.log("Brukeren eller eposten eksisterer allerede")    
+    console.log("Brukeren eller eposten eksisterer allerede")    
   }
 }

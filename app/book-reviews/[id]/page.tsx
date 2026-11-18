@@ -33,16 +33,18 @@ export default async function ReadReviews({
 
     return (
         <>
-            <div className="grid grid-cols-1 md:grid-cols-3">
-                {reviews.map((review) => (
-                    <div key={review.id} className="p-5 w-100">
+            <div className="relative mx-auto flex max-w-[1240px] flex-col gap-[22px] pt-[72px] text-[#FCF3E5]">
+                <div className="grid grid-cols-1 md:grid-cols-3">
+                    {reviews.map((review) => (
+                        <div key={review.id} className="p-5 w-100">
                         <p className="text-sm text-gray-500">Skrevet av {review.made_by}</p>
                         <p className="min-h-30 w-full bg-white text-sm text-black">{review.review}</p>
 
                         <DisplayStarRating value={review.rating} />
                         <DisplaySpiceRating value={review.spice} />
-                    </div>
-                ))}
+                        </div>
+                    ))}
+                </div>
             </div>
         </>  
     );

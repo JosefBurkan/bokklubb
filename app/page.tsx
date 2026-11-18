@@ -1,10 +1,10 @@
 import Link from "next/link";
 
 import { cookies } from "next/headers";
-
 import { createClient } from "@/supabase/server";
 
 import EventCard from "./components/EventCard";
+import SpotifyPodcast from "@/app/components/SpotifyPodcast";
 
 export default async function Home() {
 
@@ -141,7 +141,12 @@ export default async function Home() {
           </div>
 
           <div className="bg-[#5C3C54] w-130 h-70 rounded-3xl ml-auto">
-            <p className="p-5 text-[#EEBFB2]">Bokprat med Kamilla</p>
+            <p className="pl-5 pt-5 text-[#EEBFB2]">Bokprat med Kamilla</p>
+
+            <div className="mx-auto max-w-xl">
+              <h2 className="text-xl font-semibold text-[#5C3C54]">Podcasten vår</h2>
+              <SpotifyPodcast showId="1MmBGNp5mE0mKJ1dtMLv2Z" compact />
+            </div>
           </div>
           
         </div>

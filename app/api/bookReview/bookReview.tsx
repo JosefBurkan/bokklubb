@@ -11,7 +11,16 @@ export default async function addReview(formData: FormData) {
 
     const { data: { user } } = await supabase.auth.getUser();
 
-    const userName = user?.user_metadata?.name
+    const username =
+    user.user_metadata?.preferred_username ??
+    user.user_metadata?.user_name ??
+    user.user_metadata?.username ??
+    user.user_metadata?.full_name ??
+    user.user_metadata?.name ??
+    "Bokklubbmedlem";
+
+    let userName = user?.display_name ?? username;
+
 
     const r_review = formData.get('review') as String
     const r_rating = formData.get('rating') as String
