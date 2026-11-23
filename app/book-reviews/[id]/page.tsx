@@ -17,6 +17,7 @@ export default async function ReadReviews({
         .from("book_reviews")
         .select("*")
         .eq("book_id", id)
+        .not("review", "is", null)
     
     if (error)
     {

@@ -27,6 +27,7 @@ export default async function reviews()
         .from("book_reviews")
         .select("*")
         .eq("book_id", book.id)
+        .not("review", "is", null)
     
     if (error) {
         console.error(
