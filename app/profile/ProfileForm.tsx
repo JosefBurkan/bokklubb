@@ -113,7 +113,7 @@ export default function ProfileForm({
       <div>
         <label
           htmlFor="displayName"
-          className="mb-2 block text-sm font-semibold text-gray-900"
+          className="mb-2 block text-sm font-semibold text-[#331F2E]"
         >
           Visningsnavn
         </label>
@@ -131,10 +131,10 @@ export default function ProfileForm({
             setDisplayName(event.target.value)
           }
           placeholder="Hva skal vi kalle deg?"
-          className="w-full min-w-0 rounded-xl border border-gray-300 px-4 py-3 text-base text-gray-900 outline-none transition placeholder:text-gray-400 focus:border-black focus:ring-2 focus:ring-black/20"
+          className="w-full min-w-0 rounded-xl border border-[#B8A8A0] bg-[#FFFCF7] px-4 py-3 text-base text-[#331F2E] outline-none transition placeholder:text-[#75636F] focus:border-[#A9533D] focus:ring-2 focus:ring-[#A9533D]/20"
         />
 
-        <p className="mt-1 text-right text-xs text-gray-500">
+        <p className="mt-1 text-right text-xs text-[#76576F]">
           {displayName.length}/16 tegn
         </p>
       </div>
@@ -142,10 +142,10 @@ export default function ProfileForm({
       <div>
         <label
           htmlFor="bio"
-          className="mb-2 block text-sm font-semibold text-gray-900"
+          className="mb-2 block text-sm font-semibold text-[#331F2E]"
         >
           Om meg
-          <span className="ml-2 font-normal text-gray-500">
+          <span className="ml-2 font-normal text-[#76576F]">
             (valgfritt)
           </span>
         </label>
@@ -160,10 +160,10 @@ export default function ProfileForm({
             setBio(event.target.value)
           }
           placeholder="Fortell litt om deg selv og hvilke bøker du liker..."
-          className="w-full min-w-0 resize-y rounded-xl border border-gray-300 px-4 py-3 text-base text-gray-900 outline-none transition placeholder:text-gray-400 focus:border-black focus:ring-2 focus:ring-black/20"
+          className="w-full min-w-0 resize-y rounded-xl border border-[#B8A8A0] bg-[#FFFCF7] px-4 py-3 text-base text-[#331F2E] outline-none transition placeholder:text-[#75636F] focus:border-[#A9533D] focus:ring-2 focus:ring-[#A9533D]/20"
         />
 
-        <p className="mt-1 text-right text-xs text-gray-500">
+        <p className="mt-1 text-right text-xs text-[#76576F]">
           {bio.length}/300 tegn
         </p>
       </div>
@@ -173,22 +173,22 @@ export default function ProfileForm({
           role="status"
           aria-live="polite"
           className={`text-sm ${
-            isError ? "text-red-600" : "text-green-700"
+            isError ? "text-red-700" : "text-green-800"
           }`}
         >
           {message}
         </p>
       )}
 
-      <div className="flex flex-col-reverse gap-3 border-t border-gray-100 pt-5 sm:flex-row sm:items-center sm:justify-between">
-        <p className="text-xs leading-relaxed text-gray-600">
+      <div className="flex flex-col-reverse gap-3 border-t border-[#E1D6CC] pt-5 sm:flex-row sm:items-center sm:justify-between">
+        <p className="text-xs leading-relaxed text-[#594653]">
           Endringene påvirker bare profilen din på bokklubben.
         </p>
 
         <button
           type="submit"
           disabled={saving}
-          className="w-full shrink-0 rounded-xl bg-black px-6 py-3 font-semibold text-white transition hover:bg-gray-800 disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
+          className="w-full shrink-0 rounded-xl bg-[#493346] px-6 py-3 font-semibold text-white transition hover:bg-[#5C3C54] disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
         >
           {saving ? "Lagrer..." : "Lagre profil"}
         </button>

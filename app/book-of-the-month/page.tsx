@@ -70,6 +70,7 @@ export default async function Manedens_Bok() {
             .from("book_reviews")
             .select("*, profiles(*)")
             .eq("book_id", book.id)
+            .not("review", "is", null)
             .order("rating", { ascending: false })
             .limit(1)
             .maybeSingle(),
@@ -77,6 +78,7 @@ export default async function Manedens_Bok() {
             .from("book_reviews")
             .select("*, profiles(*)")
             .eq("book_id", book.id)
+            .not("review", "is", null)
             .order("rating", { ascending: true })
             .limit(1)
             .maybeSingle(),

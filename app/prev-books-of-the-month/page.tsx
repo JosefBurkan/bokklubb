@@ -31,6 +31,7 @@ export default async function prevBooksOfTheMonth() {
     const { data: reviews } = await supabase
     .from("book_reviews")
     .select("*")
+    .not("review", "is", null)
 
     if (error) {
         console.error(

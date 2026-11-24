@@ -43,6 +43,10 @@ export default function Navbar() {
         Nyheter
       </Link>
 
+      <Link href="/community" className={linkStyle}>
+        Community
+      </Link>
+
       <Link
         href="/about"
         className={linkStyle}>
