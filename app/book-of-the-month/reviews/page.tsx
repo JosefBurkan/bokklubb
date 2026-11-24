@@ -25,7 +25,7 @@ export default async function reviews()
 
     const { data: reviews } = await supabase
         .from("book_reviews")
-        .select("*")
+        .select("*, profiles(*)")
         .eq("book_id", book.id)
     
     if (error) {
@@ -43,7 +43,7 @@ export default async function reviews()
                 <div className="grid grid-cols-1 md:grid-cols-3">
                     {reviews.map((review) => (
                         <div key={review.id} className="p-5 w-100">
-                        <p className="text-sm text-gray-500">Skrevet av {review.made_by}</p>
+                        <p className="text-sm text-gray-500">Skrevet av {review.profiles?.display_name}</p>
                         <p className="min-h-30 w-full bg-white text-sm text-black">{review.review}</p>
 
                         <DisplayStarRating value={review.rating} />

@@ -24,8 +24,15 @@ export default async function UserReviews({
     
     const { data: reviews, error } = await supabase
         .from("book_reviews")
-        .select("*, Books(*)")
+        .select("*, Books(*), profiles(*)")
         .eq("user_id", existingProfile.id);
+    
+    if (error) {
+        console.error(
+            "Error fetching events:",
+            error
+        );
+    }
     
     return (
         <>
@@ -34,7 +41,7 @@ export default async function UserReviews({
                     {reviews.map((review) => (
                         <div key={review.id} className="p-5 w-100">
                         <p className="text-black">{review.Books?.name}</p>
-                        <p className="text-sm text-gray-500">Skrevet av {review.made_by}</p>
+                        <p className="text-sm text-gray-500">Skrevet av {review.profiles?.display_name}</p>
                         <p className="min-h-30 w-full bg-white text-sm text-black">{review.review}</p>
 
                         <DisplayStarRating value={review.rating} />

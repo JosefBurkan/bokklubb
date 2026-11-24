@@ -17,6 +17,16 @@ export default async function Manedens_Bok() {
     
     
     const { data: { user } } = await supabase.auth.getUser();
+
+    function calculateAverage(arr, type) {
+        let sum = 0;
+        for (let i = 0; i < arr.length; i++) {
+            sum += arr[i][type];
+        }
+        return sum / arr.length;
+    }
+
+    const roundToHalf = (num) => Math.round(num * 2) / 2;
     
     // Navnet til brukeren man er logget inn på
     const displayName = user?.user_metadata?.name;
@@ -58,14 +68,14 @@ export default async function Manedens_Bok() {
     const [{ data: bestReview }, { data: worstReview }] = await Promise.all([
         supabase
             .from("book_reviews")
-            .select("*")
+            .select("*, profiles(*)")
             .eq("book_id", book.id)
             .order("rating", { ascending: false })
             .limit(1)
             .maybeSingle(),
         supabase
             .from("book_reviews")
-            .select("*")
+            .select("*, profiles(*)")
             .eq("book_id", book.id)
             .order("rating", { ascending: true })
             .limit(1)
@@ -74,6 +84,23 @@ export default async function Manedens_Bok() {
     
   
     console.log(book);
+
+    // Hent alle reviews for å kalkulere snittet
+    const { data: reviews } = await supabase
+        .from("book_reviews")
+        .select("*")
+        .eq("book_id", book.id)
+    
+    // Kalkuler snittet av alle vurderingene
+    const averageRating = calculateAverage(reviews, "rating");
+    const averageSpice = calculateAverage(reviews, "spice");
+
+    // Rund snittet til hele eller halve verdier så det skal passe stjernene
+    const averageRatingRounded = roundToHalf(averageRating)
+    const averageSpiceRounded = roundToHalf(averageSpice)
+
+    console.log(averageRatingRounded);
+    console.log(averageSpiceRounded);
 
     return (
 
@@ -108,7 +135,7 @@ export default async function Manedens_Bok() {
                     <div className="pt-10">
                         Vurderingen dere har gitt denne boka:        
                         {bestReview ? (
-                            <DisplayStarRating value={bestReview.rating} />
+                            <DisplayStarRating value={averageRatingRounded} />
                         ) : (
                             <p className="mt-2 text-gray-600">Ingen vurderinger ennå.</p>
                         )}
@@ -116,7 +143,7 @@ export default async function Manedens_Bok() {
                             
                     <div>
                         Spice-vurderingen dere har gitt denne boka:
-                        {bestReview && <DisplaySpiceRating value={bestReview.spice} />}
+                        {bestReview && <DisplaySpiceRating value={averageSpiceRounded} />}
                     </div>
                 </div>
 
@@ -134,7 +161,7 @@ export default async function Manedens_Bok() {
                     
             <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                     <div className="p-5 w-100">
-                        <p className="text-sm text-gray-500">Skrevet av {bestReview.made_by}</p>
+                        <p className="text-sm text-gray-500">Skrevet av {bestReview.profiles?.display_name}</p>
                         <p className="min-h-30 w-full bg-white text-sm">{bestReview.review}</p>
 
                         <DisplayStarRating value={bestReview.rating} />
@@ -142,7 +169,7 @@ export default async function Manedens_Bok() {
                     </div>
                         
                     <div className="p-5 w-100">
-                        <p className="text-sm text-gray-500">Skrevet av {worstReview.made_by}</p>
+                        <p className="text-sm text-gray-500">Skrevet av {worstReview.profiles?.display_name}</p>
                         <p className="min-h-30 w-full bg-white text-sm">{worstReview.review}</p>
 
                         <DisplayStarRating value={worstReview.rating} />
