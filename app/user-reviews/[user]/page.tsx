@@ -28,14 +28,9 @@ export default async function UserReviews({
     
     const { data: reviews, error } = await supabase
         .from("book_reviews")
-<<<<<<< HEAD
         .select("*, Books(*), profiles(*)")
-        .eq("user_id", existingProfile.id);
-=======
-        .select("*, Books(*)")
         .eq("user_id", existingProfile.id)
         .not("review", "is", null);
->>>>>>> c55a3194078f5444cf0787bbf962fce5dba7a547
     
     if (error) {
         console.error(
